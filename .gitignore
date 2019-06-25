@@ -28,3 +28,5 @@ compiler.xml
 misc.xml
 modules.xml
 vcs.xml
+
+.idea/
