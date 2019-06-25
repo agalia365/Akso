@@ -4,10 +4,12 @@
 # 1 Java 8 新特性简介
 
 # 2 Lambda 表达式
-## 1. 定义： Lambda: In programming languages such as Lisp, Python and Ruby lambda is an operator used to denote anonymous functions or closures, following the usage of lambda calculus.
+## 1. 定义： 
+
+    Lambda: In programming languages such as Lisp, Python and Ruby lambda is an operator used to denote anonymous functions or closures,
+    following the usage of lambda calculus.
     
     Lambda表达式为java添加了缺失的函数式编程特性， 使我们能将函数当做一等公民看
-    
     在将函数作为一等公民的语言中， Lambda 表达式的类型是函数。 但是在java 中， Lambda表达式是对象， 他们
     必须依附于一类特别的对象类型---函数式接口（functional interface）
 
