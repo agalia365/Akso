@@ -10,6 +10,10 @@
     <version>1.0</version>
     <modules>
         <module>AksoNote</module>
+        <module>AksoAPI</module>
+        <module>AksoBusiness</module>
+        <module>AksoWeb</module>
+        <module>AksoBatch</module>
     </modules>
 
 
