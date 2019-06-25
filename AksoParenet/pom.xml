@@ -17,5 +17,25 @@
         <module>AksoDemo</module>
     </modules>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>4.11</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+    </properties>
+
+    <!-- 配置远程发布到私服，mvn deploy -->
+    <!--<distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://XXXXXXXX:8088/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://XXXXXXXX:8088/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>-->
+
 
 </project>
