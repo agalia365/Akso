@@ -34,3 +34,24 @@ rm filename // 删除文件
 git rm filename // 把工作区删除的文件提交到暂存区
 
 git log --pretty=oneline // git 以简短形式显示
+
+git 分支管理
+
+git把我们之前每次提交的版本串成一条时间线
+
+git branch// 查看当前分支是哪些
+
+git branch branchNmae // 创建分支
+
+git checkout -b branchName //创建并切换到新的branch， branchNmae 为新的分支名称
+
+git checkout branchNmae // 切换到branchName的分支
+
+git merge branchName //把分支branchName上的内容合并到master上
+
+Fast-forward // 快速合并，
+
+## 分支冲突
+
+
+git branch -d branchName // 删除branchName分支
