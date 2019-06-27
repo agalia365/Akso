@@ -12,6 +12,8 @@
     Lambda表达式为java添加了缺失的函数式编程特性， 使我们能将函数当做一等公民看
     在将函数作为一等公民的语言中， Lambda 表达式的类型是函数。 但是在java 中， Lambda表达式是对象， 他们
     必须依附于一类特别的对象类型---函数式接口（functional interface）
+    
+    Lambda 表达式的作用 ： 传递行为， 而不仅仅是值， 提升抽象层次， API 重用性更好， 更加灵活 
 
     
 ## 2. 关于函数式接口：
@@ -21,14 +23,32 @@
 
     高阶函数： 高阶函数英文叫Higher-order function ，如果一个函数接受一个函数作为参数，或者返回一个函数作为返回值，这样的函数称为高阶函数
     函数式编程就是指这种高度抽象的编程范式。
+    
+    Suppplier 接口，　
+    
 ## 3. Function 与 BiFunction
+       
     
 
-# 3 方法引用与构造器引用
+## 4. 
+    
 
-# 4 Stream流
+# 3 方法引用与构造器引用　ｍｅｔｈｏｄ　ｒｅｆｅｒｅｎｃｅ
+
+    方法引用实际上是ｌａｍｂｄａ　表达式的一种语法糖
+    我们可以将方法引用看做是一个【函数指针】，　ｆｕｎｃｔｉｏｎ ｐｏｉｎｔｅｒ
+    
+    方法引用一共分为四类：
+    
+    １．　类名：：静态方法名
+
+# 4 Stream流【】
 
 # 5 Optional容器类
+
+    Optional 没有序列化，　不要将optional 作为参数或者成员变量来使用
+    Optional value-based 没有公有的构造器方法，　只有私有的构造器。
+    
     Optional<T> 类(java.util.Optional) 是一个容器类，代表一个值存在或不存在，原来用null 表示一个值不存在，现在Optional 可以更好的表达这个概念。并且可以避免空指针异常。
     常用方法：
     Optional.of(T t) : 创建一个Optional 实例
@@ -39,6 +59,9 @@
     orElseGet(Supplier s) :如果调用对象包含值，返回该值，否则返回s 获取的值
     map(Function f): 如果有值对其处理，并返回处理后的Optional，否则返回Optional.empty()
     flatMap(Function mapper):与map 类似，要求返回值必须是Optional
+    
+    
+    
 
 # 6 接口中的默认方法和静态方法
 
