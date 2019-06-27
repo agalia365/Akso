@@ -24,10 +24,18 @@ public class PredicateTest2 {
         test2.conditionFilter(list, x -> true);
 
 
+        System.out.println("--------------");
+
+        test2.conditionFilter2(list, x -> x > 5, x -> x % 2 == 0);
+
+
     }
 
     public void conditionFilter(List<Integer> list, Predicate<Integer> predicate) {
-        List<Integer>  res = list.stream().filter(x -> predicate.test(x)).collect(Collectors.toList());
-        res.stream().forEach(System.out::println);
+        list.stream().filter(predicate).forEach(System.out::println);
+    }
+
+    public void conditionFilter2(List<Integer> list, Predicate<Integer> predicate1, Predicate<Integer> predicate2) {
+        list.stream().filter(predicate1.and(predicate2)).forEach(System.out::println);
     }
 }
