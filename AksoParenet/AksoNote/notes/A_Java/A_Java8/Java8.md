@@ -24,6 +24,8 @@
     高阶函数： 高阶函数英文叫Higher-order function ，如果一个函数接受一个函数作为参数，或者返回一个函数作为返回值，这样的函数称为高阶函数
     函数式编程就是指这种高度抽象的编程范式。
     
+    Suppplier 接口，　
+    
 ## 3. Function 与 BiFunction
        
     
