@@ -38,6 +38,9 @@
 # 4 Stream流
 
 # 5 Optional容器类
+
+    Optional value-based 没有公有的构造器方法，　只有私有的构造器。
+    
     Optional<T> 类(java.util.Optional) 是一个容器类，代表一个值存在或不存在，原来用null 表示一个值不存在，现在Optional 可以更好的表达这个概念。并且可以避免空指针异常。
     常用方法：
     Optional.of(T t) : 创建一个Optional 实例
@@ -48,6 +51,9 @@
     orElseGet(Supplier s) :如果调用对象包含值，返回该值，否则返回s 获取的值
     map(Function f): 如果有值对其处理，并返回处理后的Optional，否则返回Optional.empty()
     flatMap(Function mapper):与map 类似，要求返回值必须是Optional
+    
+    
+    
 
 # 6 接口中的默认方法和静态方法
 
