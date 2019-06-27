@@ -24,6 +24,8 @@
 ## 3. Function 与 BiFunction
     
 
+    Lambda 
+
 # 3 方法引用与构造器引用
 
 # 4 Stream流
