@@ -39,6 +39,7 @@
 
 # 5 Optional容器类
 
+    Optional 没有序列化，　不要将optional 作为参数或者成员变量来使用
     Optional value-based 没有公有的构造器方法，　只有私有的构造器。
     
     Optional<T> 类(java.util.Optional) 是一个容器类，代表一个值存在或不存在，原来用null 表示一个值不存在，现在Optional 可以更好的表达这个概念。并且可以避免空指针异常。
