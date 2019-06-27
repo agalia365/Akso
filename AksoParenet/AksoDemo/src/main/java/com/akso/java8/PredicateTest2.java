@@ -28,6 +28,9 @@ public class PredicateTest2 {
 
         test2.conditionFilter2(list, x -> x > 5, x -> x % 2 == 0);
 
+        System.out.println("--------------");
+
+        System.out.println(test2.isEqual("test").test("test"));
 
     }
 
@@ -37,5 +40,9 @@ public class PredicateTest2 {
 
     public void conditionFilter2(List<Integer> list, Predicate<Integer> predicate1, Predicate<Integer> predicate2) {
         list.stream().filter(predicate1.and(predicate2)).forEach(System.out::println);
+    }
+
+    public  Predicate<String> isEqual(Object object) {
+        return Predicate.isEqual(object);
     }
 }
