@@ -34,4 +34,12 @@ public class Student {
     public static int compareStudentByName(Student s1, Student s2) {
         return s1.getName().compareTo(s2.getName());
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                '}';
+    }
 }
