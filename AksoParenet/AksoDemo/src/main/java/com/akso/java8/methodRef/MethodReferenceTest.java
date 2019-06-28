@@ -2,8 +2,18 @@ package com.akso.java8.methodRef;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MethodReferenceTest {
+
+    public String getString(Supplier<String> supplier) {
+        return supplier.get() + "test";
+    }
+
+    public String getString2(String str, Function<String, String> fun) {
+        return fun.apply(str);
+    }
 
     public static void main(String[] args) {
         Student s1 = new Student("zhangsan", 50);
@@ -28,6 +38,21 @@ public class MethodReferenceTest {
         list.sort(sc::compareStudentByScore);
         list.forEach(System.out::println);
 
+        System.out.println("--------------");
 
+        list.sort((x1, x2) -> x1.compareByScore(x2));
+        list.sort(Student::compareByScore);
+
+
+        List<String> data = Arrays.asList("adfaaaa", "abbbb", "dcccc", "tcdddd");
+
+        data.sort(String::compareToIgnoreCase);
+
+        data.forEach(System.out::println);
+
+        MethodReferenceTest test = new MethodReferenceTest();
+        System.out.println(test.getString(String::new));
+
+        System.out.println(test.getString2("hello", String::new));
     }
 }

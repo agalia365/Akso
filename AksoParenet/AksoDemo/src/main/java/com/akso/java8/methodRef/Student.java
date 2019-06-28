@@ -35,6 +35,9 @@ public class Student {
         return s1.getName().compareTo(s2.getName());
     }
 
+    public int compareByScore(Student student) {
+        return student.getScore() - this.getScore();
+    }
     @Override
     public String toString() {
         return "Student{" +
