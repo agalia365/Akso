@@ -50,6 +50,9 @@
     4. 构造方法引用： 类名::new
 # 4 Stream流【】
 
+1. 流的创建方式   
+
+
 # 5 Optional容器类
 
     Optional 没有序列化，　不要将optional 作为参数或者成员变量来使用
