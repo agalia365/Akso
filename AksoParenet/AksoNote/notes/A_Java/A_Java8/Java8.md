@@ -43,7 +43,7 @@
     １．　类名：：静态方法名
           classname::staticmethod // 方法应用的方式， 不需要传入任何参数
           classname.staticmethod // 原来的静态方法调用方式， 可传入参数
-    2. 引用名（对象名） :: 实力方法名
+    2. 引用名（对象名） :: 实例方法名
     
     3. 类名::实例方法名
     
@@ -61,6 +61,19 @@ collectors
 
 IntStream.iterate(0, i -> (i + 1) % 2).distinct().limit(6).forEach(System.out::println); // 无限流， 程序一直运行，不会退出
 IntStream.iterate(0, i -> (i + 1) % 2).limit(6).distinct().forEach(System.out::println); // 程序被限制为取6个元素， 程序会正常结束
+
+内部迭代和外部迭代
+
+集合关注的是数据与数据存储本身
+流关注的则是对数据的计算
+流与迭代器类似的一点事： 流是无法重复使用或消费的。
+
+中间操作都会返回一个Stream 对象，比如说返回Stream<Student>, Stream<Integer>, Stream<String> ...
+终止操作都不会返回Stream对象。可能不返回值, 也可能返回其他类型的的单个值, 例如，min，max，count， reduce.....
+
+区分中间操作还是终止操作的主要判断依据就是看返回值类型，如果是Stream 类型的，那必定是中间操作。
+
+
 
 
 # 5 Optional容器类
