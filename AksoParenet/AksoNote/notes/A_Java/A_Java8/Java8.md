@@ -59,6 +59,8 @@ map - reduce
 collectors
 无限流，
 
+IntStream.iterate(0, i -> (i + 1) % 2).distinct().limit(6).forEach(System.out::println); // 无限流， 程序一直运行，不会退出
+IntStream.iterate(0, i -> (i + 1) % 2).limit(6).distinct().forEach(System.out::println); // 程序被限制为取6个元素， 程序会正常结束
 
 
 # 5 Optional容器类
