@@ -9,6 +9,7 @@ public class LambdaTest1 {
         String test = "test";
         List<String> list = Arrays.asList("hello", "world", "hello world");
         list.stream().map(x -> {
+            System.out.println(test);
             return x + " haha " + test;
         }).forEach(System.out::println);
     }
