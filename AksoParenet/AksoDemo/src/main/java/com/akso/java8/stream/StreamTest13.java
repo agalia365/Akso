@@ -35,6 +35,9 @@ public class StreamTest13 {
         // 分区是分组的一种特殊表现形式
         Map<Boolean, List<Student>> partitionMap = list.stream().collect(Collectors.partitioningBy(student -> student.getScore() > 60 ));
         System.out.println(partitionMap);
+
+        Map<Boolean, List<Student>> partitionMap2 = list.stream().collect(Collectors.partitioningBy(student -> student.getAge() > 30 ));
+        System.out.println(partitionMap2);
     }
 
 
