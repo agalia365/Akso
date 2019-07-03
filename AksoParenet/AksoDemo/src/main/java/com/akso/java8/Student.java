@@ -2,17 +2,27 @@ package com.akso.java8;
 
 public class Student {
 
-    public Student() {
-    }
+    private String name;
 
-    public Student(String name, int age) {
+    private int score;
+
+    private int age;
+    public Student() {
+
+    }
+    public Student(String name, int score, int age) {
         this.name = name;
+        this.score = score;
         this.age = age;
     }
 
-    private String name;
+    public int getAge() {
+        return age;
+    }
 
-    private int age;
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getName() {
         return name;
@@ -22,11 +32,30 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public int getScore() {
+        return score;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public static  int compareStudentByScore(Student s1, Student s2) {
+        return s1.getScore() - s2.getScore();
+    }
+
+    public static int compareStudentByName(Student s1, Student s2) {
+        return s1.getName().compareTo(s2.getName());
+    }
+
+    public int compareByScore(Student student) {
+        return student.getScore() - this.getScore();
+    }
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                '}';
     }
 }
