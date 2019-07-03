@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class StreamTest13 {
 
     public static void main(String[] args) {
-        Student student1 = new Student("zhangsan" , 100, 20);
+        Student student1 = new Student("张三" , 100, 20);
         Student student2 = new Student("lisi" , 90, 32);
         Student student3 = new Student("zhangsan" , 94, 25);
         Student student4 = new Student("zhangsan" , 88, 22);
