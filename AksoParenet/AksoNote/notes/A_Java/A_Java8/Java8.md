@@ -430,6 +430,9 @@ Collector 接口源码:
         }
     }
 
+
+    当结果容器和中间容器一直的时候，ｆｉｎｉｓｈｅｒ方法不被执行，程序直接返回中间容器类型
+
     ### 6 Comparator
     
     thenComparing，　只有当前一个比较器比较结果相等的时候才会去执行thenComparing的比较，　
