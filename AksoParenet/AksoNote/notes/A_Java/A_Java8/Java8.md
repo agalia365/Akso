@@ -430,6 +430,11 @@ Collector 接口源码:
         }
     }
 
+    ### 6 Comparator
+    
+    thenComparing，　只有当前一个比较器比较结果相等的时候才会去执行thenComparing的比较，　
+    换句话说，当第一个比较器已经能确定比较顺序的时候，不需要去执行第二个比较器
+    
     
     
 
