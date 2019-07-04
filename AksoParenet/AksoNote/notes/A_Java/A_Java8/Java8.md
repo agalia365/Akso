@@ -433,15 +433,24 @@ Collector 接口源码:
 
     当结果容器和中间容器一直的时候，ｆｉｎｉｓｈｅｒ方法不被执行，程序直接返回中间容器类型
 
-    ### 6 Comparator
+
+    
+### 5 comparator 比较器    
+
+    list.stream().sorted(Comparator.comparing((String x) -> x.length()).reversed()).forEach(System.out::println);
+    
+    提问： 为什么编译器这里不能推断出x的数据类型？？？
+    答案： .reversed() 返回一个新的Comparator给sort 接口，类型为泛型T, 基于Comparator.comparing((String x) -> x.length()), 
+    但是该方法参数为？ super T, 且离上下文stream 环境太远， JVM无法推断出对应的数据类型， 需要显式声明
+    
+    list.stream().sorted(Comparator.comparing(x -> x.length())).forEach(System.out::println);
+    提问： 此刻为什么不需要类型推断呢？
+    
+### 6 Comparator
     
     thenComparing，　只有当前一个比较器比较结果相等的时候才会去执行thenComparing的比较，　
     换句话说，当第一个比较器已经能确定比较顺序的时候，不需要去执行第二个比较器
     
-    
-    
-
-
 
 # 5 Optional容器类
 
