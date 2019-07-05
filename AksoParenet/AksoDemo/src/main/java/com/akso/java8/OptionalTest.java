@@ -13,5 +13,9 @@ public class OptionalTest {
         System.out.println(optional.orElse("te"));
 
         System.out.println(optional.orElseGet(() -> "hi"));
+
+        System.out.println(optional.map(x -> x + "test"));
+
+        System.out.println(optional.flatMap(x -> Optional.of(x + "test")));
     }
 }
