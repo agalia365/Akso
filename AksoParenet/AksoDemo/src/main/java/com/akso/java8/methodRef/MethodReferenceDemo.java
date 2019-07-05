@@ -1,4 +1,4 @@
-package com.akso.java8;
+package com.akso.java8.methodRef;
 
 import java.util.Arrays;
 import java.util.List;

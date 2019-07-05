@@ -1,7 +1,6 @@
 package com.akso.java8.collector;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -20,26 +19,42 @@ public class MySetCollector2<T> implements Collector<T, Map<T, T>, Map<T, T>> {
 
     @Override
     public Supplier<Map<T, T>> supplier() {
-        return null;
+        System.out.println("supplier invoked!");
+        return HashMap<T, T>::new;
     }
 
     @Override
     public BiConsumer<Map<T, T>, T> accumulator() {
-        return null;
+        System.out.println("Accumulator invoked!");
+        return (map, value) -> map.put(value, value);
     }
 
     @Override
     public BinaryOperator<Map<T, T>> combiner() {
-        return null;
+        System.out.println("combiner invoked!");
+        return (map1, map2) -> {
+            map1.putAll(map2);
+            return map1;
+        };
     }
 
     @Override
     public Function<Map<T, T>, Map<T, T>> finisher() {
-        return null;
+        System.out.println("finisher invoked");
+        return Function.identity();
     }
 
     @Override
     public Set<Characteristics> characteristics() {
-        return null;
+        System.out.println("Characteristics invoked!");
+        return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED, Characteristics.IDENTITY_FINISH));
+    }
+
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("hello", "world", "hello word", "hello");
+        Map<String, String> map = list.stream().collect(new MySetCollector2<>());
+
+        System.out.println(map);
+
     }
 }
