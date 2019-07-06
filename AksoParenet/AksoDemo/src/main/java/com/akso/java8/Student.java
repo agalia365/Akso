@@ -51,11 +51,33 @@ public class Student {
     public int compareByScore(Student student) {
         return student.getScore() - this.getScore();
     }
+
     @Override
     public String toString() {
         return "Student{" +
                 "name='" + name + '\'' +
                 ", score=" + score +
+                ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (score != student.score) return false;
+        if (age != student.age) return false;
+        return name.equals(student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + score;
+        result = 31 * result + age;
+        return result;
     }
 }
