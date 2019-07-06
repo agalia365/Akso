@@ -1,3 +1,5 @@
+
+
 ​	
 
                                            Java 8 新特性
@@ -88,10 +90,30 @@ Lambda表达式的几种语法格式：
 高阶函数： -高阶函数英文叫Higher-order function ，如果一个函数接受一个函数作为参数，或者返回一个函数作为返回值，这样的函数称为高阶函数
 函数式编程就是指这种高度抽象的编程范式。
 
-Suppplier 接口，　
 ```
 
+| 函数式接口          | 函数描述          | 原始类型特化                                                 |
+| ------------------- | ----------------- | ------------------------------------------------------------ |
+| Predicate           | T -> boolean      | IntPredicate, LongPredicate, DoublePredicate                 |
+| Consumer            | T -> void         | IntConsumer, LongConsumer, DoubleConsumer                    |
+| Function<T, R>      | T -> R            | IntFunction, IntToDoubleFunction, IntToLongFunction, LongFunction, LongToDoubleFunction, LongToIntFunction, DoubleFunction, ToIntFunction, ToDoubleFunction, ToLongFunction |
+| Supplier            | () -> T           | BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier   |
+| UnaryOperator       | T -> T            | IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator     |
+| BinaryOperator      | (T, T) -> T       | IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator  |
+| BiPredicate<L, R>   | (L, R) -> boolean |                                                              |
+| BiConsumer<T, U>    | (T, U) -> void    | ObjIntConsumer, ObjLongConsumer, ObjDoubleConsumer           |
+| BiFunction<T, U, R> | (T, U) -> R       | ToIntBiFunction<T, U>, ToLongBiFunction<T, U>, ToDoubleBiFunction<T, U> |
 
+Lambda 及函数式接口的例子
+
+| 使用案例              | Lambda 的例子                                                | 对应的函数式接口                                             |
+| --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 布尔表达式            | (List list) -> list.isEmpty()                                | Predicate<List>                                              |
+| 创建对象              | () -> new Apple(10)                                          | Supplier                                                     |
+| 消费一个对象          | (Apple a) -> System.out.println(a.getWeight())               | Consumer                                                     |
+| 从一个对象中选择/提取 | (String s) -> s.length()                                     | Function<String, Integer>, ToIntFunction                     |
+| 合并两个值            | (int a, int b) -> a * b                                      | IntBinaryOperator                                            |
+| 比较两个对象          | (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()) | Comparator, BiFunction<Apple, Apple, Integer>, ToIntBiFunction<Apple, Apple> |
 
 
 # 3 方法引用
