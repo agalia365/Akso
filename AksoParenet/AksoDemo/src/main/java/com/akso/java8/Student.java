@@ -7,9 +7,60 @@ public class Student {
     private int score;
 
     private int age;
+
+    private Status status;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                ", age=" + age +
+                ", status=" + status +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (score != student.score) return false;
+        if (age != student.age) return false;
+        if (name != null ? !name.equals(student.name) : student.name != null) return false;
+        return status == student.status;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + score;
+        result = 31 * result + age;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Student() {
 
     }
+
+    public Student(String name, int score, int age, Status status) {
+        this.name = name;
+        this.score = score;
+        this.age = age;
+        this.status = status;
+    }
+
     public Student(String name, int score, int age) {
         this.name = name;
         this.score = score;
@@ -52,32 +103,9 @@ public class Student {
         return student.getScore() - this.getScore();
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", score=" + score +
-                ", age=" + age +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Student student = (Student) o;
-
-        if (score != student.score) return false;
-        if (age != student.age) return false;
-        return name.equals(student.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + score;
-        result = 31 * result + age;
-        return result;
+    public enum Status {
+        BUSY,
+        FREE,
+        VACATION;
     }
 }
