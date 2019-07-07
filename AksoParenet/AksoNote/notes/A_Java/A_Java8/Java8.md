@@ -463,6 +463,10 @@ System.out.println(summaryStatistics.getSum());
 
 ## 4.3 Fork/Join
 
+ForkJoin框架是从jdk7中新特性,它同ThreadPoolExecutor一样，也实现了Executor和ExecutorService接口。它使用了一个无限队列来保存需要执行的任务，而线程的数量则是通过构造函数传入，如果没有向构造函数中传入希望的线程数量，那么当前计算机可用的CPU数量会被设置为线程数量作为默认值。
+
+forkjoin最核心的地方就是利用了现代硬件设备多核,在一个操作时候会有空闲的cpu,那么如何利用好这个空闲的cpu就成了提高性能的关键,而这里我们要提到的工作窃取（work-stealing）算法就是整个forkjion框架的核心理念,工作窃取（work-stealing）算法是指某个线程从其他队列里窃取任务来执行。
+
 Fork/Join 框架: 就是在必要的情况下，将一个大任务，进行拆分（fork）成若干个小任务（拆到不可再拆时）， 再将一个个小任务运算的结果进行join汇总。
 
 ![1562490134471](1562490134471.png)
@@ -475,6 +479,24 @@ Fork/Join 框架: 就是在必要的情况下，将一个大任务，进行拆�
 
 ## 4.4 stream/parallelstream
 
+Stream 就如同一个迭代器（Iterator），单向，不可往复，数据只能遍历一次，遍历过一次后即用尽了，就好比流水从面前流过，一去不复返。
+
+而和迭代器又不同的是，Stream 可以并行化操作，迭代器只能命令式地、串行化操作。顾名思义，当使用串行方式去遍历时，每个 item 读完后再读下一个 item。而使用并行去遍历时，数据会被分成多个段，其中每一个都在不同的线程中处理，然后将结果一起输出。Stream 的并行操作依赖于 Java7 中引入的 Fork/Join 框架（JSR166y）来拆分任务和加速处理过程。Java 的并行 API 演变历程基本如下：
+
+```java
+1.0-1.4 中的 java.lang.Thread  
+5.0 中的 java.util.concurrent  
+6.0 中的 Phasers 等  
+7.0 中的 Fork/Join 框架  
+8.0 中的 Lambda 
+```
+
+Stream 的另外一大特点是，数据源本身可以是无限的。
+
+parallelStream其实就是一个并行执行的流.它通过默认的ForkJoinPool,可能提高你的多线程任务的速度.具有平行处理能力，处理的过程会分而治之，也就是将一个大任务切分成多个小任务，这表示每个任务都是一个操作.
+
+在Java 8引入了自动并行化的概念。它能够让一部分Java代码自动地以并行的方式执行，也就是我们使用了ForkJoinPool的ParallelStream。
+
 
 
 parallel 并行流操作时，jdk默认生成cpu核心数的线程数目
@@ -485,7 +507,9 @@ parallel 并行流操作时，jdk默认生成cpu核心数的线程数目
 System.out.println(Runtime.getRuntime().availableProcessors());
 ```
 
+**lambda的执行并不是瞬间完成的,所有使用parallel streams的程序都有可能成为阻塞程序的源头,并且在执行过程中程序中的其他部分将无法访问这些workers,这意味着任何依赖parallel streams的程序在什么别的东西占用着common ForkJoinPool时将会变得不可预知并且暗藏危机.**
 
+**Parallel streams 是无法预测的，而且想要正确地使用它有些棘手。几乎任何parallel streams的使用都会影响程序中无关部分的性能，而且是一种无法预测的方式**
 
 ## 4.5 comparator 比较器    
 
@@ -534,15 +558,13 @@ IntStream.iterate(0, i -> (i + 1) % 2).limit(6).distinct().forEach(System.out::p
 
 
 
-当结果容器和中间容器一直的时候，ｆｉｎｉｓｈｅｒ方法不被执行，程序直接返回中间容器类型
+当结果容器和中间容器一致的时候，ｆｉｎｉｓｈｅｒ方法不被执行，程序直接返回中间容器类型
 
 当Characteristics.CONCURRENT时， combiner 的lambda表达式不会被执行，因为当并行操作时，中间结果容器只有一个实例，
 所以combiner 不需要去合并中间结果。
 当Characteristics不是CONCURRENT时， 中间结果容器会有多个结果，此时需要执行combiner中的lamdba表达式去合并中间结果集
 
-
-
-combiner 串行时候不会被调用， 并行并且不存在CONCURRENT枚举值的时候才会被调用
+**combiner 串行时候不会被调用， 并行并且不存在CONCURRENT枚举值的时候才会被调用**
 
 ```java
 
@@ -743,7 +765,9 @@ public interface Person {
     
     LocalDate LocalTime LocalDateTime 三个类的使用方式一样，只是代表的含义不同而已。
 
-## 7.2. 使用 Instant ： 时间戳（以Unix 元年 ： 1970-01-01 00：00：00 到某个时间之间的毫秒数）
+## 7.2. Instant
+
+使用 Instant ： 时间戳（以Unix 元年 ： 1970-01-01 00：00：00 到某个时间之间的毫秒数）
 
 
 ## 7.3. Duration 计算两个时间之间的间隔   
