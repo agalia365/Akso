@@ -113,7 +113,29 @@ Lambda 及函数式接口的例子
 | 消费一个对象          | (Apple a) -> System.out.println(a.getWeight())               | Consumer                                                     |
 | 从一个对象中选择/提取 | (String s) -> s.length()                                     | Function<String, Integer>, ToIntFunction                     |
 | 合并两个值            | (int a, int b) -> a * b                                      | IntBinaryOperator                                            |
-| 比较两个对象          | (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()) | Comparator, BiFunction<Apple, Apple, Integer>, ToIntBiFunction<Apple, Apple> |
+| 比较两个对象          | (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()) | Comparator, BiFunction<Apple, Apple, Integer>, ToIntBiFunction<Apple, Apple |
+
+函数式接口调用示例：
+
+
+
+```java
+	ｐublic void test(Consumer<Integer> consumer) {
+        consumer.accept(100);
+    }
+
+    public static void main(String[] args) {
+        ConsumerTest test = new ConsumerTest();
+
+        Consumer<Integer> consumer = x -> System.out.println(x);
+        IntConsumer intConsumer = x -> System.out.println(x);
+
+        test.test(consumer);    // 面向对象方式
+        test.test(consumer::accept);    // 函数式方式
+        test.test(intConsumer::accept);     // 函数式方式
+    }
+```
+
 
 
 # 3 方法引用
@@ -185,7 +207,9 @@ Stream很像Iterator，单向，只能遍历一遍。但是Stream可以只通过
 
 使用Stream分为三个阶段：
 
-### 4.2.1 获取流：我们有多种方式生成Stream
+### 4.2.1 获取流：
+
+我们有多种方式生成Stream
 
 ```java
 // 通过Stream接口的静态工厂方法，of方法，其生成的Stream是有限长度的，Stream的长度为其内的元素个数。
@@ -497,8 +521,6 @@ parallelStream其实就是一个并行执行的流.它通过默认的ForkJoinPoo
 
 在Java 8引入了自动并行化的概念。它能够让一部分Java代码自动地以并行的方式执行，也就是我们使用了ForkJoinPool的ParallelStream。
 
-
-
 parallel 并行流操作时，jdk默认生成cpu核心数的线程数目
 
 拓展： 如果计算机是4核心cpu， 某些情况下Intel会通过超线程技术，将cpu实现为8核心，所以最终当执行parallel并行流操作时， 默认生成8个线程。具体可以通过如下代码来查看当前机器的内核数量：
@@ -511,12 +533,14 @@ System.out.println(Runtime.getRuntime().availableProcessors());
 
 **Parallel streams 是无法预测的，而且想要正确地使用它有些棘手。几乎任何parallel streams的使用都会影响程序中无关部分的性能，而且是一种无法预测的方式**
 
+
+
 ## 4.5 comparator 比较器    
 
 ```java
 list.stream().sorted(Comparator.comparing((String x) -> x.length()).reversed()).forEach(System.out::println);
 
-提问： 为什么编译器这里不能推断出x的数据类型？？？
+**提问： 为什么编译器这里不能推断出x的数据类型？？？**
 答案： .reversed() 返回一个新的Comparator给sort 接口，类型为泛型T, 基于Comparator.comparing((String x) -> x.length()), 
 但是该方法参数为？ super T, 且离上下文stream 环境太远， JVM无法推断出对应的数据类型， 需要显式声明
 
@@ -545,8 +569,6 @@ collectors
 IntStream.iterate(0, i -> (i + 1) % 2).distinct().limit(6).forEach(System.out::println); // 无限流， 程序一直运行，不会退出
 IntStream.iterate(0, i -> (i + 1) % 2).limit(6).distinct().forEach(System.out::println); // 程序被限制为取6个元素， 程序会正常结束
 
-内部迭代和外部迭代
-
 集合关注的是数据与数据存储本身
 流关注的则是对数据的计算
 流与迭代器类似的一点事： 流是无法重复使用或消费的。
@@ -555,8 +577,6 @@ IntStream.iterate(0, i -> (i + 1) % 2).limit(6).distinct().forEach(System.out::p
 终止操作都不会返回Stream对象。可能不返回值, 也可能返回其他类型的的单个值, 例如，min，max，count， reduce.....
 
 区分中间操作还是终止操作的主要判断依据就是看返回值类型，如果是Stream 类型的，那必定是中间操作。
-
-
 
 当结果容器和中间容器一致的时候，ｆｉｎｉｓｈｅｒ方法不被执行，程序直接返回中间容器类型
 
@@ -751,36 +771,263 @@ public interface Person {
 ​    
 # 7 新时间日期API
 
-    Joda Time 第三方时间日期API， 相较于jdk1.7 和之前的日期API， 提供了很多实用的接口和功能， 导致于很少有人实用jdk 自身的日期API，
-    从JDK1.8开始， 全新设计的时间日期API， 类似于Joda Time, 提供了很多实用的接口函数。
+    Joda Time 第三方时间日期API， 相较于jdk1.7 和之前的日期API， 提供了很多实用的接口和功能， 导致于很少有人使用jdk 自身的日期API，从JDK1.8开始， 全新设计的时间日期API， 类似于Joda Time, 提供了很多实用的接口函数。
     
-    传统的时间 API 存在线程安全的问题，在多线程开发中必须要上锁，所以 java8 现在为我们提供了一套全新的时间日期 API，
-    新的日期API每次改变都是一个新的实例，每个实例都是不可变的，所以新的日期API 是线程安全的
+    传统的时间 API 存在线程安全的问题，在多线程开发中必须要上锁，所以 java8 现在为我们提供了一套全新的时间日期 API，新的日期API每次改变都是一个新的实例，每个实例都是不可变的，所以新的日期API 是线程安全的.
 
-## 7.1. 使用 LocalDate、LocalTime、LocalDateTime
+## 7.1. 使用 LocalDate, LocalTime, LocalDateTime
 
-    LocalDate、LocalTime、LocalDateTime类的实例是不可变的对象，分别表示使用 ISO-8601 （ISO-8601 日历系统是国际化组织制定的现代化
-    公民的日期和时间的表达法）日历系统的日期、时间、日期和时间。它们提供了简单的日期或时间，并不包含当前时间的时间信息。
-    也不包含与时区相关的信息。
-    
-    LocalDate LocalTime LocalDateTime 三个类的使用方式一样，只是代表的含义不同而已。
+```java
+LocalDate, LocalTime, LocalDateTime类的实例是不可变的对象，分别表示使用 ISO-8601 （ISO-8601 日历系统是国际化组织制定的现代化公民的日期和时间的表达法）日历系统的日期、时间、日期和时间。它们提供了简单的日期或时间，并不包含当前时间的时间信息,也不包含与时区相关的信息。
+
+LocalDate LocalTime LocalDateTime 三个类的使用方式一样，只是代表的含义不同而已。
+
+		LocalDateTime time = LocalDateTime.now();
+        System.out.println(time);
+        LocalDateTime time2 = LocalDateTime.of(2019, 07, 8, 15, 30, 30);
+        System.out.println(time2);
+
+        time2.plusYears(1);
+        System.out.println(time2);
+        time2.minusYears(2);
+        System.out.println(time2);
+
+        System.out.println(time.getYear());
+        System.out.println(time.getMonth());
+        System.out.println(time.getDayOfMonth());
+        System.out.println(time.getHour());
+        System.out.println(time.getMinute());
+        System.out.println(time.getSecond());
+```
 
 ## 7.2. Instant
 
 使用 Instant ： 时间戳（以Unix 元年 ： 1970-01-01 00：00：00 到某个时间之间的毫秒数）
 
+```java
+ 		Instant instant = Instant.now();
+        System.out.println(instant);
+
+        OffsetDateTime offsetDateTime =instant.atOffset(ZoneOffset.ofHours(8));
+        System.out.println(offsetDateTime);
+
+        System.out.println(instant.toEpochMilli());
+        System.out.println(instant.getEpochSecond());
+
+        // 相较于ｕｎｉｘa元年的时间
+        Instant instant1 = Instant.ofEpochSecond(1000);
+        System.out.println(instant1);
+```
 
 ## 7.3. Duration 计算两个时间之间的间隔   
 
+```java
+/**
+     * Duration 计算２个"时间"之间的间隔
+     */
+    @Test
+    public void test3() {
+        Instant instant = Instant.now();
+
+        try {
+            Thread.sleep(1000);
+        }catch (Exception e) {
+
+        }
+        Instant instant2 = Instant.now();
+
+        Duration duration = Duration.between(instant, instant2);
+        System.out.println(duration);
+
+        System.out.println("-----------");
+
+        LocalDateTime ldt = LocalDateTime.now();
+
+        try {
+            Thread.sleep(1000);
+        }catch (Exception e) {
+
+        }
+        LocalDateTime ldt2 = LocalDateTime.now();
+        Duration duration1 = Duration.between(ldt, ldt2);
+        System.out.println(duration1.toNanos());
+    }
+```
+
+​			
+
 ## 7.4. Period 计算两个日期之间的间隔
 
+```java
+/**
+ * Period : 计算２个"日期" 之间的间隔
+ */
+@Test
+public void test4() {
+    LocalDate ld = LocalDate.now();
+
+    LocalDate ld2 = LocalDate.of(2018, 12, 1);
+
+    Period p = Period.between(ld, ld2);
+    System.out.println(p);
+    System.out.println(p.getYears() + "Y" + p.getMonths() + "M" + p.getDays() + "days");
+}
+```
 ## 7.5. 时间校正器
+
+```java
+@Test
+    public void test8() {
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(dateTimeFormatter.format(ldt));
+        LocalDateTime ldt2 = ldt.plusYears(2);
+        System.out.println(dateTimeFormatter.format(ldt2));
+        LocalDateTime ldt3 = ldt.plusMonths(10);
+        System.out.println(dateTimeFormatter.format(ldt3));
+        LocalDateTime ldt4 = ldt.plusDays(100);
+        System.out.println(dateTimeFormatter.format(ldt4));
+        LocalDateTime ldt5 = ldt.plusSeconds(1000);
+        System.out.println(dateTimeFormatter.format(ldt5));
+    }
+```
 
 ## 7.6. 时间、日期格式化 DateTimeFormatter
 
 ### 7.6.1 时间转字符串
+
+```java
+   /**
+     * DateTimeFormatter:格式化时间/日期
+     */
+    @Test
+    public void test5() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY/MM/dd HH:mm:ss");
+        LocalDateTime ldt = LocalDateTime.now();
+
+        String str = dateTimeFormatter.format(ldt);
+
+        System.out.println(str);
+
+    }
+```
+
 ### 7.6.2 字符串转时间
+
+```java
+	/**
+     * 字符转时间
+     */
+    @Test
+    public void test6() {
+        String dateStr = "2019-07-08 15:23:48";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ld = LocalDateTime.parse(dateStr, dateTimeFormatter);
+        System.out.println(ld);
+    }
+```
+
+## 7.7 时区处理
+
+```java
+	/**
+     * ZoneDate, ZoneDateTime, ZoneTime
+     */
+    @Test
+    public void test7() {
+        System.out.println(ZoneId.getAvailableZoneIds());
+
+        LocalDateTime ldt = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+        System.out.println(ldt);
+
+        LocalDate ld = LocalDate.now(ZoneId.of("America/Marigot"));
+        System.out.println(ld);
+    }
+```
+
+
 
 # 8 重复注解和类型注解
     Java 8对注解处理提供了两点改进：可重复的注解及可用于类型的注解。
+
+重复注解：　可以在一个类上或方法上重复多次使用的注解
+
+类型注解：　在入参的地方使用注解
+
+```java
+package com.akso.java8.annotation;
+
+
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
+
+@Repeatable(MyAnnotations.class)
+@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MyAnnotation {
+
+    String value() default "leo";
+}
+
+```
+
+```java
+
+package com.akso.java8.annotation;
+
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
+
+@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MyAnnotations {
+    MyAnnotation[] value();
+}
+
+```
+
+```java
+package com.akso.java8.annotation;
+
+import org.junit.Test;
+
+import java.lang.reflect.Method;
+
+/**
+ * 重复注解和类型注解
+ */
+public class AnnotationTest {
+
+    @MyAnnotation("hello")
+    @MyAnnotation("world")
+    public void show(@MyAnnotation("abc") String str) {
+
+    }
+
+    @Test
+    public void test() throws NoSuchMethodException {
+        Class<AnnotationTest> clazz = AnnotationTest.class;
+        Method m1 = clazz.getMethod("show", String.class);
+
+        MyAnnotation[] myAnnotations =  m1.getAnnotationsByType(MyAnnotation.class);
+        System.out.println("-----------");
+        for (MyAnnotation annotation: myAnnotations) {
+            System.out.println(annotation.value());
+        }
+    }
+}
+
+```
+
+
 
