@@ -15,6 +15,7 @@
         <module>AksoWeb</module>
         <module>AksoBatch</module>
         <module>AksoDemo</module>
+        <module>AksoDemoTest</module>
     </modules>
 
     <properties>
