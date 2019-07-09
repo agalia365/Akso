@@ -1,6 +1,5 @@
 package com.akso.java8.stream2;
 
-import java.sql.SQLOutput;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 

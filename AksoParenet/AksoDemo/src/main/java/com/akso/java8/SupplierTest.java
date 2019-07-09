@@ -1,6 +1,5 @@
 package com.akso.java8;
 
-import java.sql.SQLOutput;
 import java.util.function.Supplier;
 
 public class SupplierTest {

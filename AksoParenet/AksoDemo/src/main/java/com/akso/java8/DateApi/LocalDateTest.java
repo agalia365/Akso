@@ -1,11 +1,9 @@
 package com.akso.java8.DateApi;
 
 import org.junit.Test;
-import sun.util.resources.LocaleData;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 
 public class LocalDateTest {
 
