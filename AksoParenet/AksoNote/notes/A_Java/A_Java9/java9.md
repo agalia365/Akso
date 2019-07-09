@@ -186,9 +186,130 @@ public class TryTest {
 
 # 8. 语法改进：Under Score(下划线)使用的限制
 
-在java 8 中，标识符可以独立使用“_”来命名：
+在java 8 中，标识符可以独立使用下划线“_”来命名, 但是，在java 9 中规定下划线“_”不再可以单独命名标识符了，如果使用，会报错：
+
+```java
+	/**
+     * 关于下划线的使用， 在JDK9中，不再可以单独命名标识符了
+     */
+    @Test
+    public void test() {
+        String _ = "name"; // JDK 9 编译错误， JDK9 之前可以正常使用
+        System.out.println(_); 
+    }
+```
 
 
+
+# 9. String 存储结构变更
+
+Motivation
+The current implementation of the String class stores characters in a char array, using two bytes (sixteen bits) for each character. Data gathered from many different applications indicates that strings are a major component of heap usage and, moreover, that most String objects contain only Latin-1 characters. Such characters require only one byte of storage, hence half of the space in the internal char arrays of such String objects is going unused.
+
+Description
+We propose to change the internal representation of the String class from a UTF-16 char array to a byte array plus an encoding-flag field. The new String class will store characters encoded either as ISO-8859-1/Latin-1 (one byte per character), or as UTF-16 (two bytes per character), based upon the contents of the string. The encoding flag will indicate which encoding is used.
+
+结论：String 再也不用 char[] 来存储啦，改成了 byte[] 加上编码标记，节约了一些空间。
+
+StringBuffer 与 StringBuilder
+
+String-related classes such as AbstractStringBuilder, StringBuilder, and StringBuffer will be updated to use the same representation, as will the HotSpot VM's intrinsic string operations.
+
+
+
+```java
+
+/**
+ * 面试题：String， StringBuffer， StringBuilder 异同
+ * String : JDK8 及之前： 底层使用char[]来存储， JDK9:底层使用byte[] + (encoding flag) 方式
+ * StringBuffer: JDK8 及之前：底层使用char[]来存储，JDK9:底层使用byte[] + (encoding flag)方式
+ * StringBuilder: JDK8 及之前：底层使用char[]来存储，JDK9:底层使用byte[] + (encoding flag)方式
+ * String : 不可变的字符序列
+ * StringBuffer: 可变的字符序列， 线程安全的， 效率低 (多线程情况下使用）
+ * StringBuilder: 可变的字符序列， 线程不安全的， 效率高(jdk5.0) （单线程情况下使用）
+ */
+```
+
+
+
+# 10. 集合工厂方法--快速创建只读集合
+
+调用集合中静态方法of()，可以将不同数量的参数传输到此工厂方法中。此功能可用于Set和List，也可用于Map的类似形式。此时得到的集合，是不可变的：在创建后，继续添加元素到这些集合会导致 “UnsupportedOperationException”
+
+
+
+```java
+package com.akso.java9;
+
+import org.junit.Test;
+
+import java.util.*;
+
+public class CollectionMapTest {
+
+    /**
+     * 创建一个只读特点的集合 JDK 8 及以前的做法 , case1
+      */
+    @Test
+    public void test1() {
+        List<String> list = Arrays.asList("hello", "hi", "how are you", "what is up", "how is going");
+        // 调用Collections中的方法， 将list 变为只读
+        List<String> newList = Collections.unmodifiableList(list);
+
+//        newList.add("aaa"); // 不能执行， 会报java.lang.UnsupportedOperationException
+        // 遍历 JDK8
+        newList.forEach(System.out::println);
+    }
+
+    /**
+     * 创建一个只读特点的集合 JDK 8 及以前的做法 , case2
+     */
+    @Test
+    public void test2() {
+        List<String> list = Collections.unmodifiableList(Arrays.asList("hello", "hi", "how are you"));
+        list.forEach(System.out::println);
+
+        Set<String> set = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("hello", "hi", "how are you")));
+        set.forEach(System.out::println);
+
+        Map<String, Integer> map = Collections.unmodifiableMap(new HashMap<>(){
+            {
+                put("Tom", 100);
+                put("Lee", 120);
+                put("MM", 98);
+            }
+        });
+        map.forEach((k, v) -> System.out.println(k + ": " + v));
+    }
+
+    /**
+     * JDK 9 中的升级写法
+     */
+    @Test
+    public void test3() {
+        List<String> list = List.of("hi ", "hello", "nihao");
+        list.forEach(System.out::println);
+
+        Set<String> set = Set.of("hi", "hello", "nihao");
+        set.forEach(System.out::println);
+
+        Map<String, Integer> map = Map.of("Tom", 18, "Lee", 20);
+        map.forEach((k, v) -> System.out.println(k + ": " + v));
+
+        Map<String, Integer> map2 = Map.ofEntries(Map.entry("Tom", 18), Map.entry("Lee", 22));
+        map2.forEach((k, v) -> System.out.println(k + ": " + v));
+    }
+}
+```
+
+
+
+# 11. 增强的 Stream API
+
+​		Java 的 Steam API 是java标准库最好的改进之一，让开发者能够快速运算，从而能够有效的利用数据并行计算。Java 8 提供的 Steam 能够利用多核架构实现声明式的数据处理。
+在 Java 9 中，Stream API 变得更好，Stream 接口中添加了 4 个新的方法：dropWhile, takeWhile, ofNullable，还有个 iterate 方法的新重载方法，可以让你提供一个 Predicate (判断条件)来指定什么时候结束迭代.
+
+​		除了对 Stream 本身的扩展，Optional 和 Stream 之间的结合也得到了改进。现在可以通过 Optional 的新方法 stream() 将一个 Optional 对象转换为一个(可能是空的) Stream 对象
 
 # １０．改进的 @Deprecated 注解
 
