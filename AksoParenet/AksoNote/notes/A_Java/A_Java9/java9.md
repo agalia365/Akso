@@ -14,11 +14,11 @@ Java 9 发布于 2017 年 9 月 22 日，带来了很多新特性，其中最主
 - **进程 API**: 改进的 API 来控制和管理操作系统进程。引进 java.lang.ProcessHandle 及其嵌套接口 Info 来让开发者逃离时常因为要获取一个本地进程的 PID 而不得不使用本地代码的窘境。
 - **改进的 Stream API**：改进的 Stream API 添加了一些便利的方法，使流处理更容易，并使用收集器编写复杂的查询。
 - **改进 try-with-resources**：如果你已经有一个资源是 final 或等效于 final 变量,您可以在 try-with-resources 语句中使用该变量，而无需在 try-with-resources 语句中声明一个新变量。
-- **改进的弃用注解 @Deprecated**：注解 @Deprecated 可以标记 Java API 状态，可以表示被标记的 API 将会被移除，或者已经破坏。
+- 改进的弃用注解 @Deprecated：注解 @Deprecated 可以标记 Java API 状态，可以表示被标记的 API 将会被移除，或者已经破坏。
 - **改进钻石操作符(Diamond Operator)** ：匿名类可以使用钻石操作符(Diamond Operator)。
 - **改进 Optional 类**：java.util.Optional 添加了很多新的有用方法，Optional 可以直接转为 stream。
 - **多分辨率图像 API**：定义多分辨率图像API，开发者可以很容易的操作和展示不同分辨率的图像了。
-- **改进的 CompletableFuture API** ： CompletableFuture 类的异步机制可以在 ProcessHandle.onExit 方法退出时执行操作。
+- 改进的 CompletableFuture API： CompletableFuture 类的异步机制可以在 ProcessHandle.onExit 方法退出时执行操作。
 - **轻量级的 JSON API**：内置了一个轻量级的JSON API
 - **响应式流（Reactive Streams) API**: Java 9中引入了新的响应式流 API 来支持 Java 9 中的响应式编程。
 
@@ -111,7 +111,7 @@ public void diamondOperator() {
 
 
 
-# 7．改进的 try-catch-finally
+# 7．改进的 try-with-resources
 
 java 9 中，用资源语句编写try将更容易，我们可以在try子句中使用已经初始化过的资源，此时的资源是final的
 
@@ -162,7 +162,7 @@ public class TryTest {
             reader.read();
         } catch (IOException e) {
             e.printStackTrace();
-        } // JDK9 不再需要编写finally，即不再需要显式的关闭，但是前提是，要求
+        } // JDK9 不再需要编写finally，即不再需要显式的关闭，但是前提是，要求资源对象的实例化， 必须放在try 的一对（）内完成
     }
 
     /**
@@ -391,12 +391,48 @@ public class StreamAPITest {
 
 
 
-# １０．改进的 @Deprecated 注解
-
-
-
 # １２．改进的 Optional 类
+
+Optional 类中 stream()的使用:
+
+```java
+	public void test1() {
+        List<String> list = Arrays.asList("Tom", "Jim", "Toy", "Lee");
+
+        Optional<List<String>> optional = Optional.ofNullable(list);
+        optional.stream().forEach(System.out::println);
+    }
+
+@Test
+    public void test2() {
+        List<String> list = Arrays.asList("Tom", "Jim", "Toy", "Lee");
+        Optional<List<String>> optional = Optional.ofNullable(list);
+        Stream<String> stream = optional.stream().flatMap(x -> x.stream());
+        System.out.println(stream.count());
+    }
+
+```
 
 # １３．多分辨率图像 API
 
-# １４．改进的 CompletableFuture API
+HTTP/1.1 和 HTTP/2 的主要区别是如何在客户端和服务器之间构建
+和传输数据。HTTP/1.1 依赖于请求/响应周期。 HTTP/2 允许服务器
+“push”数据:它可以发送比客户端请求更多的数据。 这使得它可
+以优先处理并发送对于首先加载网页至关重要的数据。
+Java 9 中有新的方式来处理 HTTP 调用。它提供了一个新的 HTTP
+客 户 端 ( HttpClient ), 它 将 替 代 仅 适 用 于 blocking 模 式 的
+HttpURLConnection (HttpURLConnection 是在 HTTP 1.0 的时代创建的,
+并使用了协议无关的方法),并提供对 WebSocket 和 HTTP/2 的支持。
+此外,HTTP 客户端还提供 API 来处理 HTTP/2 的特性,比如流和
+服务器推送等功能。
+全新的 HTTP 客户端 API 可以从 jdk.incubator.httpclient 模块中获取。
+因为在默认情况下,这个模块是不能根据 classpath 获取的,需要使
+用 add modules 命令选项配置这个模块,将这个模块添加到 classpath
+中。
+
+# １4．全新的 HTTP 客户端 API
+
+HTTP,用于传输网页的协议,早在 1997 年就被采用在目前的 1.1
+版本中。直到 2015 年,HTTP2 才成为标准。
+
+![1562727390589](1562727390589.png)
