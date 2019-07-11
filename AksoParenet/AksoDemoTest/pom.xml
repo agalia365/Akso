@@ -9,8 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>AksoDemo</artifactId>
-
+    <artifactId>AksoDemoTest</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.akso</groupId>
+            <artifactId>AksoDemo</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

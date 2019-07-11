@@ -1,0 +1,3 @@
+module AksoDemoTest {
+    requires AksoDemo;
+}
