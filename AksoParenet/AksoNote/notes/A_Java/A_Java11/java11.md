@@ -1,35 +1,35 @@
-Java11 新特性
+# Java11 新特性
 
-1. String 新增方法
+# 1. String 新增方法
 
-   ```java
-   		/**
-            * isBlank 判断字符是否为空
-            */
-           System.out.println("   \t \n    ".isBlank());
-   
-           /**
-            * strip 去除首位空格
-            */
-           System.out.println("------" + "   a\t \nb    ".strip() + "----");
-           System.out.println("------" + "   a\t \nb    ".trim() + "----");
-   
-           // stripTrailing去除尾部空格
-           System.out.println("------" + "   a\t \nb    ".stripTrailing() + "----");
-           // stripLeading 去除头部空格
-           System.out.println("------" + "   a\t \nb    ".stripLeading() + "----");
-   
-           String str = "abc";
-           String str2 = str.repeat(5);
-           System.out.println(str2);
-   
-           var str3 = "abc\ndfas\n";
-           System.out.println(str3.lines().count());
-   ```
+```java
+		/**
+         * isBlank 判断字符是否为空
+         */
+        System.out.println("   \t \n    ".isBlank());
 
-2. Optional 的增强
+        /**
+         * strip 去除首位空格
+         */
+        System.out.println("------" + "   a\t \nb    ".strip() + "----");
+        System.out.println("------" + "   a\t \nb    ".trim() + "----");
 
-   ![1562806264878](1562806264878.png)
+        // stripTrailing去除尾部空格
+        System.out.println("------" + "   a\t \nb    ".stripTrailing() + "----");
+        // stripLeading 去除头部空格
+        System.out.println("------" + "   a\t \nb    ".stripLeading() + "----");
+
+        String str = "abc";
+        String str2 = str.repeat(5);
+        System.out.println(str2);
+
+        var str3 = "abc\ndfas\n";
+        System.out.println(str3.lines().count());
+```
+
+# 2. Optional 的增强
+
+![1562806264878](1562806264878.png)
 
 
 
@@ -51,14 +51,16 @@ public class OptionalTest {
 
 
 
-3. 局部变量类型推断升级
+# 3. 局部变量类型推断升级
 
-   ![1562806632217](1562806632217.png)
+![1562806632217](1562806632217.png)
 
-4. 更简化的编译允许程序
+# 4. 更简化的编译允许程序
 
-   ![1562806865584](1562806865584.png)
+![1562806865584](1562806865584.png)
 
-5. 废弃Nashorn javascript 引擎
+# 5. 废弃Nashorn javascript 引擎
 
-   ![1562806960948](1562806960948.png)
+![1562806960948](1562806960948.png)
+
+# 6. ZGC 
