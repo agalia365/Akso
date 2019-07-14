@@ -11,4 +11,7 @@ public class Float2Binary {
         String s2 = Long.toBinaryString(Double.doubleToLongBits(b));
         System.out.println(s2);
     }
+
+    private volatile boolean stop = false;
+
 }
