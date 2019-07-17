@@ -3,7 +3,9 @@ package com.akso.java8;
 import java.util.ArrayList;
 import java.util.List;
 
+//@requires vm.compMode != "Xcomp"
 public class Test {
+
 
     public static void main(String[] args) {
         List<Student> list1 = new ArrayList<>();
