@@ -42,10 +42,18 @@ public class BubbleSort {
     }
 
     /**
-     * 冒泡排序的第一种实现，　常规冒泡排序
+     * 冒泡排序的第一种实现，　常规冒泡排序 -->通过对比相邻2个数，得到最大/最小数；
      */
     public void bubbleSort1(int[] arr) {
-
+        int right = arr.length-1;
+        for(int i=0; i< arr.length; i++) {
+            for(int j=0; j < right; j++) {
+                if(arr[j] > arr[j+1]) {
+                    swap(arr, j, j+1);
+                }
+            }
+            right--;
+        }
     }
 
     /**
@@ -57,9 +65,22 @@ public class BubbleSort {
 
     /**
      * 冒泡排序的第三种实现
+     * // 初始化冒泡排序的swap下表，每次比较值之前初始化为0，
+     * 当一次循环比较结束后，还未发生swap，说明当前数组已存在顺序，无需再继续排序
      */
     public void bubbleSort3(int[] arr) {
-
+        int right = arr.length -1 ;
+        int m = 1;
+        for (int i = 0; i < arr.length && m > 0; i++) {
+            m =0;
+            for(int j=0; j<right; j++) {
+                if(arr[j] > arr[j + 1]) {
+                    swap(arr, j, j+1);
+                    m = j;
+                }
+            }
+            right--;
+        }
     }
 
     /**
@@ -69,6 +90,11 @@ public class BubbleSort {
 
     }
 
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
     private void print(int[] arr) {
         Arrays.stream(arr).forEach(System.out::print);
     }
