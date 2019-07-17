@@ -1,5 +1,6 @@
 package com.akso.java9.bean;
 
+
 public class Person {
 
     private String name;

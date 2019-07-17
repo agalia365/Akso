@@ -131,16 +131,33 @@ Lambda 及函数式接口的例子
 
 
 ```java
-	ｐublic void test(Consumer<Integer> consumer) {
+	ｐublic void finf(Consumer<Integer> consumer) {
         consumer.accept(100);
+        if(apple.getColor().equals(Color.Red)) {
+                apple.....
+            } else 
+            
+            if
+            
     }
 
     public static void main(String[] args) {
         ConsumerTest test = new ConsumerTest();
 
         Consumer<Integer> consumer = x -> System.out.println(x);
-        IntConsumer intConsumer = x -> System.out.println(x);
+        (Apple apple) -> {
+            
+            if(apple.getColor().equals(Color.Red)) {
+                apple.....
+            }
+            if(aa.weight....>...) {
+                
+            }
+            
+        }
+        IntConsumer intConsumer = x -> System.out.println(x)()
 
+        test.test(x ->System.out.println(x))
         test.test(consumer);    // 面向对象方式
         test.test(consumer::accept);    // 函数式方式
         test.test(intConsumer::accept);     // 函数式方式
@@ -478,7 +495,7 @@ System.out.println(summaryStatistics.getSum());
         // 中间操作: 不会执行任何操作
         Stream<Student> stream = students.stream().filter((e) -> {
             System.out.println("Stream API 的中间操作");
-            return e.getAge() > 35;
+            return e.getAge() > 35;	
         });
         // 终止操作: 一次性执行全部内容, 即惰性求值
         stream.forEach(System.out::println);

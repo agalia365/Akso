@@ -8,13 +8,13 @@ public class StringTest {
         /**
          * isBlank 判断字符是否为空
          */
-        System.out.println("   \t \n    ".isBlank());
+        System.out.println("   \t \n    ".isBlank()); //　true
 
         /**
          * strip 去除首位空格
          */
-        System.out.println("------" + "   a\t \nb    ".strip() + "----");
-        System.out.println("------" + "   a\t \nb    ".trim() + "----");
+        System.out.println("------" + "   \t \n    ".strip() + "----");
+        System.out.println("------" + "   \t \n    ".trim() + "----");
 
         // stripTrailing去除尾部空格
         System.out.println("------" + "   a\t \nb    ".stripTrailing() + "----");
