@@ -2,9 +2,6 @@ package com.akso.algorithm.sort;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
-
 public class SelectionSort {
     int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
 
@@ -71,11 +68,6 @@ public class SelectionSort {
             }
             swap(arr, minPos, i);
         }
-    }
-
-    private static void swap(int[] arr, int minPos, int maxPox, int minValue, int maxValue) {
-        arr[minPos] = minValue;
-        arr[maxPox] = maxValue;
     }
 
 
