@@ -157,6 +157,10 @@ Tableclass Node {
 
 ​			2.ReHash：遍历原Entry数组，把所有的Entry重新Hash到新数组。
 
+https://www.jianshu.com/p/ee0de4c99f87
+
+
+
 
 
 初始化ｓｉｚｅ，　会根据算法去算，　最终结果都是2^n
