@@ -42,8 +42,8 @@ public class InsertionSort {
             int tmp = arr[i];
             int k=-1;
             for(int j=i-1; j >= 0; j--) {
-                if(arr[i] < arr[j]) {
-                    arr[i] = arr[j];
+                if(arr[j+1] < arr[j]) {
+                    arr[j+1] = arr[j];
                     k = j;
                 }
             }

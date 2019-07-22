@@ -45,11 +45,24 @@ public class BubbleSort {
      * 冒泡排序的第一种实现，　常规冒泡排序 -->通过对比相邻2个数，得到最大/最小数；
      */
     public void bubbleSort1(int[] arr) {
-        int right = arr.length-1;
         for(int i=0; i< arr.length; i++) {
-            for(int j=0; j < right; j++) {
+            for(int j=0; j < arr.length - 1; j++) {
                 if(arr[j] > arr[j+1]) {
                     swap(arr, j, j+1);
+                }
+            }
+        }
+    }
+
+    /**
+     * 冒泡排序的第二种实现, 在常规冒泡排序的基础上，跳过已排好的序列。
+     */
+    public void bubbleSort2(int[] arr) {
+        int right = arr.length - 1;
+        for (int i = 0; i < arr.length ; i++) {
+            for(int j=0; j < right; j++) {
+                if(arr[j] > arr[j + 1]) {
+                    this.swap(arr, j , j+1);
                 }
             }
             right--;
@@ -57,22 +70,15 @@ public class BubbleSort {
     }
 
     /**
-     * 冒泡排序的第二种实现
-     */
-    public void bubbleSort2(int[] arr) {
-
-    }
-
-    /**
      * 冒泡排序的第三种实现
-     * // 初始化冒泡排序的swap下表，每次比较值之前初始化为0，
+     * // 初始化冒泡排序的swap下标，每次比较值之前初始化为0，
      * 当一次循环比较结束后，还未发生swap，说明当前数组已存在顺序，无需再继续排序
      */
     public void bubbleSort3(int[] arr) {
         int right = arr.length -1 ;
         int m = 1;
-        for (int i = 0; i < arr.length && m > 0; i++) {
-            m =0;
+        while(m>0) {
+            m=0;
             for(int j=0; j<right; j++) {
                 if(arr[j] > arr[j + 1]) {
                     swap(arr, j, j+1);
@@ -84,10 +90,30 @@ public class BubbleSort {
     }
 
     /**
-     * 冒泡排序的第四种实现: 又称为鸡尾酒排序法
+     * 冒泡排序的第四种实现, 即双向排序， 又称为鸡尾酒排序法
+     *
+     * 进行双向的循环，正向循环把最大元素移动到末尾，逆向循环把最小元素移动到最前
+     *
      */
     public void bubbleSort4(int[] arr) {
+        int left =0;
+        int right = arr.length -1;
+        while(left < right) {
 
+            for (int i = 0; i < arr.length-1; i++) {
+                if(arr[i] > arr[i + 1]) {
+                    swap(arr, i, i+1);
+                }
+            }
+            left++;
+
+            for (int j = right; j >1 ; j--) {
+                if(arr[j] < arr[j-1]) {
+                    swap(arr, j, j-1);
+                }
+            }
+            right--;
+        }
     }
 
     public void swap(int[] arr, int i, int j) {
