@@ -16,11 +16,11 @@ public class ShellSort {
     public void shellsort(int[] arr) {
         int gap = 4;
 
-        for (int i = arr.length-gap; i > 0 ; i--) {
-            for (int j = i-gap; j >=0 ; j--) {
-                if(arr[i] < arr[j]) {
-                    swap(arr, i, j);
-                }
+        for (int i = 0; i < arr.length - gap ; i++) {
+            int j = i+gap;
+            while(j-gap > 0 && arr[j] < arr[j-gap]) {
+                swap(arr, j, j-gap);
+                j--;
             }
         }
     }
