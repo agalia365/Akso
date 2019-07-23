@@ -24,11 +24,11 @@ public class InsertionSort {
      * @param arr
      */
     public void insertionSort(int[] arr) {
-        for(int i=arr.length-1; i > 0 ; i--) {
-            for(int j=i-1; j >= 0; j--) {
-                if(arr[i] < arr[j]) {
-                    swap(arr, i, j);
-                }
+        for (int i = 0; i < arr.length - 1; i++) {
+            int j = i +1;
+            while (j>0 && arr[j] < arr[j-1]) {
+                swap(arr, j, j-1);
+                j--;
             }
         }
     }
@@ -38,17 +38,17 @@ public class InsertionSort {
      * @param arr
      */
     public void insertionSort2(int[] arr) {
-        for(int i=arr.length-1; i > 0 ; i--) {
-            int tmp = arr[i];
-            int k=-1;
-            for(int j=i-1; j >= 0; j--) {
-                if(arr[j+1] < arr[j]) {
-                    arr[j+1] = arr[j];
-                    k = j;
-                }
+        for (int i = 0; i < arr.length -1; i++) {
+            int j = i +1;
+            int temp = arr[j];
+            int k = -1;
+            while( j> 0 && temp < arr[j-1]) {
+                arr[j] = arr[j-1];
+                k = j-1;
+                j--;
             }
             if(k != -1) {
-                arr[k] = tmp;
+                arr[k] = temp;
             }
         }
     }

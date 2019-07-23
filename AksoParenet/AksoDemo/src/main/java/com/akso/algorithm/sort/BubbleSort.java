@@ -121,6 +121,7 @@ public class BubbleSort {
         arr[j]= arr[i];
         arr[i] = temp;
     }
+
     private void print(int[] arr) {
         Arrays.stream(arr).forEach(System.out::print);
     }
