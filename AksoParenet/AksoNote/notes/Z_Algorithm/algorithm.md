@@ -361,3 +361,111 @@ public class BubbleSort {
     }
 }
 ```
+
+### 2.4.4  希尔排序（Shell Sort）
+
+希尔排序是希尔（Donald Shell）于1959年提出的一种排序算法。希尔排序也是一种插入排序，它是简单插入排序经过改进之后的一个更高效的版本，也称为缩小增量排序，同时该算法是冲破O(n2）的第一批算法之一。它与插入排序的不同之处在于，它会优先比较距离较远的元素。希尔排序又叫缩小增量排序。
+
+希尔排序是把记录按下表的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。
+
+**算法描述**
+
+先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，具体算法描述：
+
+- 选择一个增量序列t1，t2，…，tk，其中ti>tj，tk=1；
+- 按增量序列个数k，对序列进行k 趟排序；
+- 每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m 的子序列，分别对各子表进行直接插入排序。仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。
+
+**算法分析**
+
+最佳情况：T(n) = O(nlog2 n)  最坏情况：T(n) = O(nlog2 n)  平均情况：T(n) =O(nlog2n)　
+
+希尔排序的ｇａｐ　除了采用每次折半的算法外还可以采用Knuth算法，即
+
+ｈ= 1;
+
+h = 3*h + 1;
+
+示例：
+
+int h =　１；
+
+while(h<array.length/3) {
+
+​		h = h*3 + 1;
+
+}
+
+for(int gap = h; gap > 0; gap = (gap - 1 )/3) {
+
+​		........
+
+}
+
+
+
+```java
+package com.akso.algorithm.sort;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+public class ShellSort {
+    int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
+
+    @Test
+    public void test1() {
+        shellsort(arr);
+        print(arr);
+    }
+
+    public void shellsort(int[] arr) {
+        int gap = arr.length/2;
+        while(gap > 0) {
+            for (int i = gap; i < arr.length ; i++) {
+                int preIndex = i - gap;
+                int tmp = arr[i];
+                int pos = -1;
+                while(preIndex >= 0 && tmp < arr[preIndex]) {
+                    arr[preIndex+gap] = arr[preIndex];
+                    pos = preIndex;
+                    preIndex = preIndex - gap;
+                }
+                if(pos != -1) {
+                    arr[pos] = tmp;
+                }
+            }
+            gap = gap / 2;
+        }
+
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
+
+    private void print(int[] arr) {
+        Arrays.stream(arr).forEach(System.out::print);
+    }
+}
+
+```
+
+### 2.5.5 归并排序（Merge Sort)
+
+和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是O(n log n）的时间复杂度。代价是需要额外的内存空间。
+
+归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。归并排序是一种稳定的排序方法。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。
+
+**算法描述**
+
+把长度为n的输入序列分成两个长度为n/2的子序列；对这两个子序列分别采用归并排序；将两个排序好的子序列合并成一个最终的排序序列。
+
+**算法分析**
+
+最佳情况：T(n) = O(n)  最差情况：T(n) = O(nlogn)  平均情况：T(n) = O(nlogn)
+
+![img](/home/leo/IdeaProjects/Akso/AksoParenet/AksoNote/notes/Z_Algorithm/mergerSort.gif)

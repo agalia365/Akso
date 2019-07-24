@@ -14,15 +14,24 @@ public class ShellSort {
     }
 
     public void shellsort(int[] arr) {
-        int gap = 4;
-
-        for (int i = 0; i < arr.length - gap ; i++) {
-            int j = i+gap;
-            while(j-gap > 0 && arr[j] < arr[j-gap]) {
-                swap(arr, j, j-gap);
-                j--;
+        int gap = arr.length/2;
+        while(gap > 0) {
+            for (int i = gap; i < arr.length ; i++) {
+                int preIndex = i - gap;
+                int tmp = arr[i];
+                int pos = -1;
+                while(preIndex >= 0 && tmp < arr[preIndex]) {
+                    arr[preIndex+gap] = arr[preIndex];
+                    pos = preIndex;
+                    preIndex = preIndex - gap;
+                }
+                if(pos != -1) {
+                    arr[pos] = tmp;
+                }
             }
+            gap = gap / 2;
         }
+
     }
 
     public void swap(int[] arr, int i, int j) {
