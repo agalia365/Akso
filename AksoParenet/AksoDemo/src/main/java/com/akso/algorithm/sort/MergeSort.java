@@ -41,12 +41,6 @@ public class MergeSort {
         return result;
     }
 
-    public void swap(int[] arr, int i, int j) {
-        int temp = arr[j];
-        arr[j]= arr[i];
-        arr[i] = temp;
-    }
-
     private void print(int[] arr) {
         Arrays.stream(arr).forEach(System.out::print);
     }
