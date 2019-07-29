@@ -11,6 +11,12 @@ public class NumberTest {
         System.out.println(b);
     }
 
+    @Test
+    public void test2() {
+        boolean b = test2(-32);
+        System.out.println(b);
+    }
+
     /**
      * 如何判断一个数是２的ｎ　次方
      * @param num
@@ -26,6 +32,13 @@ public class NumberTest {
         }
         num = num / 2;
         return test(num);
+    }
+
+    public boolean test2(int m) {
+        if(m<0) {
+            return false;
+        }
+        return (m & (m -1))  == 0;
     }
 
 }
