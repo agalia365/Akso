@@ -11,6 +11,7 @@ public class InsertionSort {
     public void test() {
         insertionSort(arr);
         print(arr);
+
     }
 
     @Test
