@@ -5,6 +5,12 @@ public class Person {
     private int age;
     private int salar;
 
+    public Person(String name, int age, int salar) {
+        this.name = name;
+        this.age = age;
+        this.salar = salar;
+    }
+
     public String getName() {
         return name;
     }

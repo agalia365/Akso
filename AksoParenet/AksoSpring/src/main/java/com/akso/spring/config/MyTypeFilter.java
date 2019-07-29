@@ -13,9 +13,9 @@ public class MyTypeFilter implements TypeFilter {
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
         ClassMetadata classMetaData = metadataReader.getClassMetadata();
         String className = classMetaData.getClassName();
-        if(className.endsWith("er")) {
-            return true;
-        }
+//        if(className.endsWith("er")) {
+//            return true;
+//        }
         return false;
     }
 }
