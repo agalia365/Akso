@@ -1,6 +1,6 @@
 Spring 注解驱动开发
 
-1.
+1. 组件注册
 
 ## 1）singleton （单一实例）
 
@@ -43,3 +43,12 @@ Spring容器会为每个独立的session创建属于自己的全新的UserPrefer
 <bean id ="userPreferences" class="...UserPreferences"   scope="globalsession" />
 
 global session只有应用在基于porlet的web应用程序中才有意义，它映射到porlet的global范围的session，如果普通的servlet的web 应用中使用了这个scope，容器会把它作为普通的session的scope对待。
+
+
+
+
+
+2. Bean 的生命周期
+
+3. 自动装配
+4. profile
