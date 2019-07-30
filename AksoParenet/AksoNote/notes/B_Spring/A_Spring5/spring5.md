@@ -110,7 +110,13 @@ global session只有应用在基于porlet的web应用程序中才有意义，它
 
 ​	@Profile ==》 Environment ==》 -DSpring.profiles.active=test
 
+​	@Profile : 指定组件在哪个环境的情况下才能被注册到容器， 不指定，任何环境下都能注册这个组件
 
+（1） 加了环境标识的bean， 只有这个环境被激活的时候才能注册到容器中， 默认是default 环境
+
+（2） 写在配置类上， 只有是指定的环境的时候，整个配置类里面的所有配置才能开始生效
+
+（3） 没有标注环境的bean ，在任何环境下都是加载的
 
 ## 1.4 组件注入
 
@@ -120,7 +126,7 @@ global session只有应用在基于porlet的web应用程序中才有意义，它
 
 ​	ApplicaitonContextAware, ApplicationContextAwareProcessor
 
-xxxAware
+​	xxxAware
 
 ## 1.5 AOP
 
@@ -163,11 +169,5 @@ xxxAware
 3. 自动装配
 4. profile
 
-@Profile : 指定组件在哪个环境的情况下才能被注册到容器， 不指定，任何环境下都能注册这个组件
 
-（1） 加了环境标识的bean， 只有这个环境被激活的时候才能注册到容器中， 默认是default 环境
-
-（2） 写在配置类上， 只有是指定的环境的时候，整个配置类里面的所有配置才能开始生效
-
-（3） 没有标注环境的bean ，在任何环境下都是加载的
 
