@@ -36,7 +36,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @ComponentScan("com.akso.spring.bean")
 @Configuration
-@PropertySource(value="classpath:person.properties")
+@PropertySource(value={"classpath:person.properties"})
 public class MainConfigOfProperty {
 
     @Bean

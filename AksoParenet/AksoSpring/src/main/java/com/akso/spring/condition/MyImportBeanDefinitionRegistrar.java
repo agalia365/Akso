@@ -6,7 +6,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
-public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
+public class  MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
     /**
      * AnnotationMetadata 当前类的注解信息
