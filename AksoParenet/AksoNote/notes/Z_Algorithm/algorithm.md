@@ -220,7 +220,7 @@ public class InsertionSort {
 
 ```
 
-### 2.4.3 冒泡排序
+### 2.4.3 冒泡排序 (Bubble Sort)
 
 冒泡排序：　冒泡排序是一种简单的排序算法, 它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。
 
@@ -526,3 +526,94 @@ public class MergeSort {
 }
 
 ```
+
+### 2.5.6 快速排序（Quick Sort）
+
+快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。
+
+**算法描述**
+
+快速排序使用分治法来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：
+
+- 从数列中挑出一个元素，称为 “基准”（pivot）；
+- 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
+- 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
+
+**动图演示**
+
+![img](quickSort.gif)
+
+
+
+```java
+package com.akso.algorithm.sort;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+public class QuickSort {
+
+    int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
+
+    @Test
+    public void test1() {
+        quickSort(arr, 0, arr.length -1);
+        print(arr);
+    }
+
+    public void quickSort(int[] arr, int left, int right) {
+        if(left < right) {
+            int pivot = partition(arr, left, right);
+            print(arr);
+        System.out.println(pivot);
+            quickSort(arr, left, pivot-1);
+            quickSort(arr, pivot+1, right);
+        }
+    }
+
+    public int partition(int[] arr, int left, int right) {
+        int pivot = arr[left];
+        while(left < right) {
+
+            while(left < right && arr[right] >= pivot) { // 从右端开始扫描， 找出小于轴的值， 放到左边的位置
+                right--;
+            }
+            arr[left] = arr[right];
+
+            while(left < right && arr[left] <= pivot) { // 从左端开始扫描， 找出大于轴的数据， 放到右边的位置
+                left++;
+            }
+            arr[right] = arr[left];
+        }
+        System.out.println("left===>" + left + ", right ===>" + right);
+        arr[left] = pivot; // 把轴的数据放到对应的轴位置
+        return left;
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
+    private void print(int[] arr) {
+        Arrays.stream(arr).forEach(System.out::print);
+        System.out.println();
+    }
+}
+
+```
+
+### 2.5.7 堆排序(Heap Sort)
+
+堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
+
+**算法描述**
+
+- 将初始待排序关键字序列(R1,R2….Rn)构建成大顶堆，此堆为初始的无序区；
+- 将堆顶元素R[1]与最后一个元素R[n]交换，此时得到新的无序区(R1,R2,……Rn-1)和新的有序区(Rn),且满足R[1,2…n-1]<=R[n]；
+- 由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2….Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成。
+
+**动图演示**
+
+![img](heapSort.gif)
