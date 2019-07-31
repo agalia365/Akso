@@ -27,12 +27,10 @@ public class QuickSort {
     public int partition(int[] arr, int left, int right) {
         int pivot = arr[left];
         while(left < right) {
-
             while(left < right && arr[right] >= pivot) { // 从右端开始扫描， 找出小于轴的值， 放到左边的位置
                 right--;
             }
             arr[left] = arr[right];
-
             while(left < right && arr[left] <= pivot) { // 从左端开始扫描， 找出大于轴的数据， 放到右边的位置
                 left++;
             }
@@ -51,5 +49,39 @@ public class QuickSort {
     private void print(int[] arr) {
         Arrays.stream(arr).forEach(System.out::print);
         System.out.println();
+    }
+
+
+    /**
+     * 快速排序的改进算法， 双轴快排， 即取2个轴，把数据分成3段进行排序
+     */
+    @Test
+    public void test2() {
+
+    }
+
+    public void quickSort2(int[] arr, int left, int right) {
+        if(left < right) {
+            int[] pivots = partition2(arr, left, right);
+            quickSort2(arr, 0, pivots[0] -1);
+            quickSort2(arr, pivots[0] + 1, pivots[1] -1);
+            quickSort2(arr, pivots[1] + 1, right);
+        }
+    }
+
+    public int[] partition2(int[] arr, int left, int right) {
+        int leftPivot = arr[left] < arr[left + 1] ? arr[left] : arr[left + 1];
+        int middlePivot = arr[left] < arr[left + 1] ? arr[left + 1] : arr[left];
+        while(left < right) {
+            if(arr[left] < leftPivot) { // 从左端开始扫描, 满足条件再less 区
+                left++;
+            } else if(arr[left] < middlePivot) { // 满足条件， 放middle 区
+
+            } else { // 其他情况放more 区
+                right--;
+
+            }
+        }
+        return null;
     }
 }

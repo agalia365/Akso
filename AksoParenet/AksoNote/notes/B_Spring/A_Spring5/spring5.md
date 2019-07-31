@@ -207,11 +207,93 @@ global session只有应用在基于porlet的web应用程序中才有意义，它
 
 ## 1.5 AOP
 
-​	@EnableAspectJAutoProxy
+```java
+/**
+ * AOP[动态代理]
+ *    ： 指在程序运行期间动态的将某段代码切入到指定方法指定位置进行的编程方式
+ *    1. 导入AOP模块， Spring AOP（spring-aspects）
+ *    2. 定义一个业务逻辑类, 在业务逻辑运行的时候， 将日志打印（方法之前，方法结束， 方法异常）
+ *    3. 定义一个日志切面类（LogAspect），切面类里面的方法需要动态感知MathCalculator.div运行到哪里， 然后执行
+ *       通知方法：
+ *              前置通知(@Before)：logStart, 在目标方法运行之前通知
+ *              后置通知(@After): logEnd， 在目标方法运行后通知(无论方法正常还是异常，方法都会调用）
+ *              返回通知(@AfterReturning)：logRetrun 在目标方法运行返回后通知
+ *              异常通知(@AfterThrowing)： logException 在目标方法运行出现异常的时候通知
+ *              环绕通知(@Around)： 动态代理， 手动推进目标方法进行(joinPoint.proceed())
+ *    4. 给切面类的目标方法标注何时何地运行()
+ *    5. 将切面类和目标（业务逻辑类）目标方法都加入到容器中
+ *    6. 告诉容器哪个是切面类, 给切面类加一个注解
+ *    7. 给配置类加@EnableAspectJAutoProxy开启基于注解的aop模式
+ *          spring 中有很多@EnableXXXX
+ *
+ *     三步：
+ *      1） 。 将业务逻辑类和切面类都加入到容器中； 告诉spring 哪个是切面类（@Aspect）
+ *      2）。 在切面类的每一个方法上标注通知注解， 告诉spring何时何地运行（切入点表达式）
+ *      3）。 开启基于注解的aop 模式（@EnableAspectJAutoProxy）
+ *
+ *
+ *   AOP原理：
+ *          @EnableAspectJAutoProxy
+ */
+@Configuration
+@EnableAspectJAutoProxy
+public class MainConfigOfAOP {
+
+    // 将业务容器类加入到容器中
+    @Bean
+    public MathCalculator mathCalculator() {
+        return new MathCalculator();
+    }
+
+    // 将切面类加入到容器中
+    @Bean
+    public LogAspect logAspect() {
+        return new LogAspect();
+    }
+}
+```
+
+​	AOP : 指在程序运行期间动态的将某段代码切入到指定方法指定位置进行的编程方式==> 动态代理
+
+@EnableAspectJAutoProxy
 
 ​	@Before/@After/@AfterReturing/@AfterThrowing/@Around
 
 @PointCut
+
+**Spring通知有哪些类型？**
+
+（1）前置通知（Before advice）：在某连接点（join point）之前执行的通知，但这个通知不能阻止连接点前的执行（除非它抛出一个异常）。
+
+（2）返回后通知（After returning advice）：在某连接点（join point）正常完成后执行的通知：例如，一个方法没有抛出任何异常，正常返回。 
+
+（3）抛出异常后通知（After throwing advice）：在方法抛出异常退出时执行的通知。 
+
+（4）后通知（After (finally) advice）：当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）。 
+
+（5）环绕通知（Around Advice）：包围一个连接点（join point）的通知，如方法调用。这是最强大的一种通知类型。 环绕通知可以在方法调用前后完成自定义的行为。它也会选择是否继续执行连接点或直接返回它们自己的返回值或抛出异常来结束执行。 环绕通知是最常用的一种通知类型。大部分基于拦截的AOP框架，例如Nanning和JBoss4，都只提供环绕通知。 
+
+**同一个aspect，不同advice的执行顺序：**
+
+①没有异常情况下的执行顺序：
+
+around before advice
+before advice
+target method 执行
+around after advice
+after advice
+afterReturning
+
+②有异常情况下的执行顺序：
+
+around before advice
+before advice
+target method 执行
+around after advice
+after advice
+afterThrowing:异常发生
+
+java.lang.RuntimeException: 异常发生
 
 ## 1.6 声明式事务
 
