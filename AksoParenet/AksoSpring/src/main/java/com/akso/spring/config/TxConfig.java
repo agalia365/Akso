@@ -3,7 +3,9 @@ package com.akso.spring.config;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -16,6 +18,8 @@ import java.beans.PropertyVetoException;
  *
  */
 @Configuration
+@EnableTransactionManagement
+@EnableAspectJAutoProxy
 public class TxConfig {
 
     @Bean
