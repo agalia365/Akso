@@ -2,7 +2,7 @@ package com.akso.algorithm.leetcode;
 
 import org.junit.Test;
 
-public class NumberTest {
+public class TwoPowerOfN {
 
 
     @Test
@@ -37,7 +37,7 @@ public class NumberTest {
     /**
      * 通过位的与运算来判断，２的ｎ　次方的都是１００００００，　２的ｎ次方－１都是０１１１１１１１，　
      * ２者与运算后为０的话，则表示该数为２的ｎ次方
-     * @param m
+     * @param
      * @return
      */
     public boolean test2(int m) {
