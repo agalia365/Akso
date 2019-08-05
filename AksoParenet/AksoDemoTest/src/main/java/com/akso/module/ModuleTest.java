@@ -26,5 +26,6 @@ public class ModuleTest {
 
     public int[] twoSum(int[] nums, int target) {
     return null;
+
     }
 }
