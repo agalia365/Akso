@@ -1,3 +1,4 @@
+
 server:
   port: 7900
 spring:
@@ -10,6 +11,8 @@ spring:
     platform: h2
     schema: classpath:schema.sql
     data: classpath:data.sql
+  application:
+    name: microservice-provider-user
 logging:
   level:
     root: INFO
@@ -17,3 +20,9 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
     com.akso: DEBUG
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+instance:
+  prefer-ip-address: true
