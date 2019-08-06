@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-dependencies</artifactId>
-            <version>Greenwichd.SR2</version>
+            <version>Greenwich.SR2</version>
         </dependency>
 
 
