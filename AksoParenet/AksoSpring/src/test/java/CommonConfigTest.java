@@ -36,13 +36,13 @@ public class CommonConfigTest {
 
     @Test
     public void testImport() {
-        AnnotationConfigApplicationContext context =  new AnnotationConfigApplicationContext(CommonConfig2.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CommonConfig2.class);
         printBeans(context);
     }
 
     @Test
     public void testFactoryBean() {
-        AnnotationConfigApplicationContext context =  new AnnotationConfigApplicationContext(CommonConfig2.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CommonConfig2.class);
         Color bean1 = (Color) context.getBean("colorFactoryBean");
         Color bean2 = (Color) context.getBean("colorFactoryBean");
         System.out.println(bean1 == bean2);
@@ -50,7 +50,7 @@ public class CommonConfigTest {
         /**
          * 要获取工厂bean 本身， 我们需要给bean id 加一个前缀 & ， 这样就可以获取到工厂bean 本身
          */
-        Object bean3 =  context.getBean("&colorFactoryBean");
+        Object bean3 = context.getBean("&colorFactoryBean");
         System.out.println(bean3.getClass());
         printBeans(context);
     }

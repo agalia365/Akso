@@ -10,7 +10,7 @@ import java.util.stream.Collector;
 /**
  * 输入　：Set<String>
  * 输出　：　Ｍａｐ<String, String>
- *
+ * <p>
  * 示例输入：　【"hello", "world", "hello word"】
  * 示例输出: [{hello, hello}, {world, world}, {hello word, hello word}]
  */

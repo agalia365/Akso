@@ -23,29 +23,30 @@ public class SelectionSort {
 
     /**
      * 选择排序优化算法:　同时选择最大和最小值，　减少一半的循环
-     *
+     * <p>
      * 时间复杂度O(n^2), 空间复杂度O(1), 不稳定, 因为选择排序的时候，数组中相同值的数据位置有可能发生改变
+     *
      * @param arr
      */
     public void selectionSort2(int[] arr) {
         int left = 0;
-        int right = arr.length-1;
+        int right = arr.length - 1;
         int minPos = 0;
         int maxPos = 0;
-        while(left < right) {
+        while (left < right) {
             minPos = left;
             maxPos = left;
             // 找出最小值　和　最大值的下标
-            for(int j=left; j<= right; j++) {
+            for (int j = left; j <= right; j++) {
                 minPos = arr[j] < arr[minPos] ? j : minPos;
                 maxPos = arr[j] > arr[maxPos] ? j : maxPos;
             }
 
-            if(minPos != left) {
+            if (minPos != left) {
                 swap(arr, minPos, left);
             }
 
-            if(maxPos == left) { // 防止最大值出现在左边最小值存放的位置，　此刻最大值已被换到了minPos位置处，所以更新最大值的位置
+            if (maxPos == left) { // 防止最大值出现在左边最小值存放的位置，　此刻最大值已被换到了minPos位置处，所以更新最大值的位置
                 maxPos = minPos;
             }
 
@@ -57,6 +58,7 @@ public class SelectionSort {
 
     /**
      * 选择排序算法: 时间复杂度O(n^2), 空间复杂度O(1), 不稳定, 因为选择排序的时候，数组中相同值的数据位置有可能发生改变
+     *
      * @param arr
      */
     public void selecionSort(int[] arr) {

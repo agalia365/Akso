@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class Person {
 
 
-
     @Value("Lee")
     private String name;
     @Value("#{20-2}")

@@ -20,9 +20,9 @@ public class AnnotationTest {
         Class<AnnotationTest> clazz = AnnotationTest.class;
         Method m1 = clazz.getMethod("show", String.class);
 
-        MyAnnotation[] myAnnotations =  m1.getAnnotationsByType(MyAnnotation.class);
+        MyAnnotation[] myAnnotations = m1.getAnnotationsByType(MyAnnotation.class);
         System.out.println("-----------");
-        for (MyAnnotation annotation: myAnnotations) {
+        for (MyAnnotation annotation : myAnnotations) {
             System.out.println(annotation.value());
         }
     }

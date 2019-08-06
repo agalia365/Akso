@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public class StreamTest4 {
 
     public static void main(String[] args) {
-        Stream<String> stream = Stream.of("hello", "world", "hello world" );
+        Stream<String> stream = Stream.of("hello", "world", "hello world");
 
 //        String[] stringArray = stream.toArray(l -> new String[l]);
 

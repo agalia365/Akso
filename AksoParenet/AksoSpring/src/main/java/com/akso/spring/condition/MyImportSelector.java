@@ -7,6 +7,7 @@ public class MyImportSelector implements ImportSelector {
     /**
      * 自定义逻辑，返回需要导入的组件数组
      * 返回值就是导入到容器中的组件全类名
+     *
      * @param annotationMetadata
      * @return
      */

@@ -12,11 +12,11 @@ import org.springframework.context.annotation.*;
                 @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.akso.spring.dao")
             }
         ),*/
-        @ComponentScan(
-                basePackages = {"com.akso.spring"}, excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.CUSTOM, value={MyTypeFilter.class})
-            }
-        )
+                @ComponentScan(
+                        basePackages = {"com.akso.spring"}, excludeFilters = {
+                        @ComponentScan.Filter(type = FilterType.CUSTOM, value = {MyTypeFilter.class})
+                }
+                )
         }
 )
 public class CommonConfig {

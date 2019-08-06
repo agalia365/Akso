@@ -14,10 +14,10 @@ public class MergeSort {
     }
 
     public int[] mergeSort(int[] arr) {
-        if(arr.length < 2) {
+        if (arr.length < 2) {
             return arr;
         }
-        int mid = arr.length/2;
+        int mid = arr.length / 2;
         int[] left = Arrays.copyOfRange(arr, 0, mid);
         int[] right = Arrays.copyOfRange(arr, mid, arr.length);
         return merge(mergeSort(left), mergeSort(right));
@@ -27,12 +27,12 @@ public class MergeSort {
         int[] result = new int[left.length + right.length];
         int lt = 0;
         int r = 0;
-        for(int i=0; i < result.length; i++) {
-            if(lt >= left.length) {
+        for (int i = 0; i < result.length; i++) {
+            if (lt >= left.length) {
                 result[i] = right[r++];
-            } else if(r >= right.length) {
+            } else if (r >= right.length) {
                 result[i] = left[lt++];
-            } else if(left[lt] <= right[r] )  {
+            } else if (left[lt] <= right[r]) {
                 result[i] = left[lt++];
             } else {
                 result[i] = right[r++];

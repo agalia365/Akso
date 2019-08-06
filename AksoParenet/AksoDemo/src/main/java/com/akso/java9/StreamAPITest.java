@@ -16,10 +16,10 @@ public class StreamAPITest {
      * 在有序的 Stream 中，takeWhile 返回从开头开始的尽量多的元素。
      */
     @Test
-    public  void test() {
+    public void test() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Stream<Integer> stream = list.stream();
-        stream.takeWhile(x -> x<5).forEach(System.out::println);
+        stream.takeWhile(x -> x < 5).forEach(System.out::println);
     }
 
     /**
@@ -30,7 +30,7 @@ public class StreamAPITest {
     public void testDropWhile() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Stream<Integer> stream = list.stream();
-        stream.dropWhile(x -> x<5).forEach(System.out::println);
+        stream.dropWhile(x -> x < 5).forEach(System.out::println);
     }
 
     /**

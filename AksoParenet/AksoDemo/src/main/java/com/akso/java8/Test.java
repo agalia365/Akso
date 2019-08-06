@@ -10,8 +10,8 @@ public class Test {
     public static void main(String[] args) {
         List<Student> list1 = new ArrayList<>();
 
-        list1.add(new Student("tom", 20, 20 ));
-        list1.add(new Student("Lee", 30, 30 ));
+        list1.add(new Student("tom", 20, 20));
+        list1.add(new Student("Lee", 30, 30));
 
 //                Arrays.asList(new Student("tom", 20, 20 ),
 //                new Student("Lee", 30, 30 ),
@@ -20,7 +20,7 @@ public class Test {
         List<Student> list2 = new ArrayList<>();
         list2.addAll(list1);
 
-        for(Student s: list2) {
+        for (Student s : list2) {
             s = new Student(s.getName() + "---new", 50, 50);
         }
         list2.forEach(System.out::println);
@@ -38,7 +38,7 @@ public class Test {
         List<String> list4 = new ArrayList<>();
         list4.addAll(list3);
 
-        for(String s: list4) {
+        for (String s : list4) {
             s = s + "-------" + "list4";
         }
         list3.forEach(System.out::println);
@@ -56,7 +56,7 @@ public class Test {
         List<String> list6 = new ArrayList<>();
         list6.addAll(list5);
 
-        for(int i =0 ; i< list6.size(); i++) {
+        for (int i = 0; i < list6.size(); i++) {
             String s = list6.get(i);
             s = new String("change");
             System.out.println(s);
@@ -70,7 +70,7 @@ public class Test {
         list7.add("test");
         list7.add(new String("new String"));
 
-        for(int i =0; i< list7.size(); i++) {
+        for (int i = 0; i < list7.size(); i++) {
             String s = list7.get(i);
 
             list7.set(i, s);

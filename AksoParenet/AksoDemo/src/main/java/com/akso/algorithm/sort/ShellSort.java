@@ -14,18 +14,18 @@ public class ShellSort {
     }
 
     public void shellsort(int[] arr) {
-        int gap = arr.length/2;
-        while(gap > 0) {
-            for (int i = gap; i < arr.length ; i++) {
+        int gap = arr.length / 2;
+        while (gap > 0) {
+            for (int i = gap; i < arr.length; i++) {
                 int preIndex = i - gap;
                 int tmp = arr[i];
                 int pos = -1;
-                while(preIndex >= 0 && tmp < arr[preIndex]) {
-                    arr[preIndex+gap] = arr[preIndex];
+                while (preIndex >= 0 && tmp < arr[preIndex]) {
+                    arr[preIndex + gap] = arr[preIndex];
                     pos = preIndex;
                     preIndex = preIndex - gap;
                 }
-                if(pos != -1) {
+                if (pos != -1) {
                     arr[pos] = tmp;
                 }
             }
@@ -36,7 +36,7 @@ public class ShellSort {
 
     public void swap(int[] arr, int i, int j) {
         int temp = arr[j];
-        arr[j]= arr[i];
+        arr[j] = arr[i];
         arr[i] = temp;
     }
 

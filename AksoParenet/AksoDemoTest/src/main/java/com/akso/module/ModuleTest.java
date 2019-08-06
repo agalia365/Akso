@@ -18,14 +18,13 @@ public class ModuleTest {
     }
 
 
-
     @Test
     public void test() {
 
     }
 
     public int[] twoSum(int[] nums, int target) {
-    return null;
+        return null;
 
     }
 }

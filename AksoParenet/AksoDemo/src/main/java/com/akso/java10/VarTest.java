@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * JDK 10 新特性:
- *
+ * <p>
  * 局部变量类型推断
  */
 public class VarTest {
@@ -17,6 +17,7 @@ public class VarTest {
      * 1. 只针对局部变量
      * 2. var 是保留类型不是关键字，意味着我们还可以用var来定义变量名和方法名
      * 3. var 不允许赋值null
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -35,7 +36,7 @@ public class VarTest {
         System.out.println(set);
         map.forEach((k, v) -> System.out.println(k + " -" + v));
 
-        for(Map.Entry<String, String> entry : map.entrySet()) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             var key = entry.getKey();
             var value = entry.getValue();
             System.out.println(key + "-" + value);

@@ -9,7 +9,7 @@ public class MainConfigOfAopTest {
     @Test
     public void test() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfigOfAOP.class);
-        MathCalculator mathCalculator = (MathCalculator)context.getBean("mathCalculator");
+        MathCalculator mathCalculator = (MathCalculator) context.getBean("mathCalculator");
         int res = mathCalculator.div(10, 2);
         System.out.println(res);
 

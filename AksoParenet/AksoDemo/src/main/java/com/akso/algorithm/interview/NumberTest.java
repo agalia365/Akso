@@ -19,15 +19,16 @@ public class NumberTest {
 
     /**
      * 如何判断一个数是２的ｎ　次方
+     *
      * @param num
      * @return
      */
     public boolean test(int num) {
 
-        if(num == 1 || num == -1)  {
+        if (num == 1 || num == -1) {
             return true;
         }
-        if(num % 2 == 1) {
+        if (num % 2 == 1) {
             return false;
         }
         num = num / 2;
@@ -35,10 +36,10 @@ public class NumberTest {
     }
 
     public boolean test2(int m) {
-        if(m<0) {
+        if (m < 0) {
             return false;
         }
-        return (m & (m -1))  == 0;
+        return (m & (m - 1)) == 0;
     }
 
 }

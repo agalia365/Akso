@@ -13,9 +13,8 @@ import java.beans.PropertyVetoException;
 /**
  * 声明式事物
  * 1. 环境搭建
- *      数据源，　数据驱动ｓｐｒｉｎｇ　ｊｄｂｃ
+ * 数据源，　数据驱动ｓｐｒｉｎｇ　ｊｄｂｃ
  * 2. 配置数据源ＪＤＢＣＴｅｍｐｌａｔｅ操作数据
- *
  */
 @Configuration
 @EnableTransactionManagement

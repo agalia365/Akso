@@ -10,6 +10,7 @@ public class ArrayTest {
     List<Integer> container = new ArrayList<>();
     Integer[] source = new Integer[]{1, 2, 3};
     List<List<Integer>> result = new ArrayList<>();
+
     /**
      * Case 1: save the index and build the target from the source array by the saved index.
      */
@@ -39,37 +40,37 @@ public class ArrayTest {
      */
     @Test
     public void testCase3() {
-        findAllSubListCase3(result, source,container, 1, 0);
+        findAllSubListCase3(result, source, container, 1, 0);
         System.out.println("---------------");
         System.out.println(result.toString());
     }
 
-    public  void findAllSubList(Integer[] source, List<List<Integer>> result, List<Integer> container, int targetLength, int start) {
+    public void findAllSubList(Integer[] source, List<List<Integer>> result, List<Integer> container, int targetLength, int start) {
         for (int i = start; i < source.length; i++) {
             container.add(i);
             if (container.size() == targetLength) {
                 buildTarget(result, source, container);
             } else {
-                findAllSubList(source, result, container, targetLength,i + 1);
+                findAllSubList(source, result, container, targetLength, i + 1);
             }
-            container.remove(container.size() -1);
+            container.remove(container.size() - 1);
         }
     }
 
-    public  void findAllSubListCase2(Integer[] source, List<List<Integer>> result, List<Integer> container, int targetLength, int start) {
+    public void findAllSubListCase2(Integer[] source, List<List<Integer>> result, List<Integer> container, int targetLength, int start) {
         for (int i = start; i < source.length; i++) {
             container.add(source[i]);
             if (container.size() == targetLength) {
                 List<Integer> targetList = new ArrayList<>();
-                for(Integer num : container) {
+                for (Integer num : container) {
                     targetList.add(num);
                 }
                 result.add(targetList);
                 System.out.println("targetList = " + targetList);
             } else {
-                findAllSubListCase2(source, result, container, targetLength,i + 1);
+                findAllSubListCase2(source, result, container, targetLength, i + 1);
             }
-            container.remove(container.size() -1);
+            container.remove(container.size() - 1);
         }
     }
 

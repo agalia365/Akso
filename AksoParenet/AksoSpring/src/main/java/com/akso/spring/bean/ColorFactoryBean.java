@@ -7,7 +7,8 @@ import org.springframework.beans.factory.FactoryBean;
  */
 public class ColorFactoryBean implements FactoryBean<Color> {
     /**
-     *  返回一个Color 对象
+     * 返回一个Color 对象
+     *
      * @return
      * @throws Exception
      */
@@ -21,6 +22,7 @@ public class ColorFactoryBean implements FactoryBean<Color> {
      * 控制是否是单例
      * true：这个bean 是单实例， 在容器中保存一份
      * false： 这是一个多实例， 每次获取都会创建一个实例
+     *
      * @return
      */
     @Override

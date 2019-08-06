@@ -33,7 +33,7 @@ public class LocalDateTest {
 
         System.out.println(instant);
 
-        OffsetDateTime offsetDateTime =instant.atOffset(ZoneOffset.ofHours(8));
+        OffsetDateTime offsetDateTime = instant.atOffset(ZoneOffset.ofHours(8));
         System.out.println(offsetDateTime);
 
         System.out.println(instant.toEpochMilli());
@@ -53,7 +53,7 @@ public class LocalDateTest {
 
         try {
             Thread.sleep(1000);
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
         Instant instant2 = Instant.now();
@@ -67,7 +67,7 @@ public class LocalDateTest {
 
         try {
             Thread.sleep(1000);
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
         LocalDateTime ldt2 = LocalDateTime.now();

@@ -20,7 +20,7 @@ public class StreamTest6 {
         // 14, 18
         // sum = 32
 
-        Optional<Integer> optional = stream2.filter(x -> (Integer)x > 2).map(x -> (Integer)x * 2).skip(2).limit(2).reduce((a, b) -> Integer.sum((Integer)a, (Integer) b));
+        Optional<Integer> optional = stream2.filter(x -> (Integer) x > 2).map(x -> (Integer) x * 2).skip(2).limit(2).reduce((a, b) -> Integer.sum((Integer) a, (Integer) b));
         optional.ifPresent(System.out::println);
 
         Stream<Integer> stream3 = Stream.iterate(1, item -> item + 2).limit(6);
