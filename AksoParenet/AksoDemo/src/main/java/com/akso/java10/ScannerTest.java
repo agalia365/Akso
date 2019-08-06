@@ -15,7 +15,7 @@ public class ScannerTest {
 //            System.out.println(scan.nextLine());
 //        }
         scan.useDelimiter(",| ");
-        while(scan.hasNext()) {
+        while (scan.hasNext()) {
             System.out.println(scan.next());
         }
     }

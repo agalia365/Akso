@@ -27,7 +27,6 @@ public class StreamAPITest3 {
      * count--返回流中元素个数的总和
      * max--返回流中最大值
      * min--返回流中最小值
-     *
      */
     @Test
     public void test() {
@@ -75,76 +74,75 @@ public class StreamAPITest3 {
         System.out.println("-------------");
     }
 
-/**
-* 收集
-* collect--将流转换为其他形式。 接受一个collector接口的实现， 用于给stream中元素做汇总的方法
-*
-*/
-@Test
-public void test3() {
-    // 获取名字
-    List<String> names = students.stream().map(s -> s.getName()).collect(Collectors.toList());
-    System.out.println(names);
+    /**
+     * 收集
+     * collect--将流转换为其他形式。 接受一个collector接口的实现， 用于给stream中元素做汇总的方法
+     */
+    @Test
+    public void test3() {
+        // 获取名字
+        List<String> names = students.stream().map(s -> s.getName()).collect(Collectors.toList());
+        System.out.println(names);
 
-    //总数
-    Long count = students.stream().collect(Collectors.counting());
-    System.out.println(count);
+        //总数
+        Long count = students.stream().collect(Collectors.counting());
+        System.out.println(count);
 
-    // 平均成绩
-    Double avg = students.stream().collect(Collectors.averagingDouble(Student::getScore));
-    System.out.println(avg);
+        // 平均成绩
+        Double avg = students.stream().collect(Collectors.averagingDouble(Student::getScore));
+        System.out.println(avg);
 
-    // 成绩总和
-    Double total = students.stream().collect(Collectors.summingDouble(Student::getScore));
-    System.out.println(total);
+        // 成绩总和
+        Double total = students.stream().collect(Collectors.summingDouble(Student::getScore));
+        System.out.println(total);
 
-    // 最大成绩
-    Optional<Student> max = students.stream().collect(Collectors.maxBy(Comparator.comparingInt(Student::getScore)));
-    max.ifPresent(System.out::println);
+        // 最大成绩
+        Optional<Student> max = students.stream().collect(Collectors.maxBy(Comparator.comparingInt(Student::getScore)));
+        max.ifPresent(System.out::println);
 
-    // 分组
-    Map<Student.Status, List<Student>> map = students.stream().collect(Collectors.groupingBy(Student::getStatus));
-    for (Map.Entry<Student.Status, List<Student>> entry: map.entrySet()) {
-        System.out.println(entry.getKey());
-        System.out.println(entry.getValue());
-    }
-
-    Map<Student.Status, Map<String, List<Student>>> map2 = students.stream()
-            .collect(Collectors.groupingBy(Student::getStatus, Collectors.groupingBy( (Student s) -> {
-                if(s.getAge() <= 35) {
-                    return "青年";
-                } else if(s.getAge() <= 50) {
-                    return "中年";
-                } else {
-                    return "老年";
-                }
-            })));
-
-    System.out.println(map2);
-
-    Map<Boolean , List<Student>> partitioning = students.stream().collect(Collectors.partitioningBy((Student s) -> {
-        if(s.getScore() < 60) {
-            return false;
-        } else {
-            return true;
+        // 分组
+        Map<Student.Status, List<Student>> map = students.stream().collect(Collectors.groupingBy(Student::getStatus));
+        for (Map.Entry<Student.Status, List<Student>> entry : map.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
         }
-    }));
-    System.out.println(partitioning);
 
-    // 组函数
-    DoubleSummaryStatistics summaryStatistics = students.stream().collect(Collectors.summarizingDouble(Student::getScore));
-    System.out.println(summaryStatistics.getMax());
-    System.out.println(summaryStatistics.getAverage());
-    System.out.println(summaryStatistics.getCount());
-    System.out.println(summaryStatistics.getMin());
-    System.out.println(summaryStatistics.getSum());
-}
+        Map<Student.Status, Map<String, List<Student>>> map2 = students.stream()
+                .collect(Collectors.groupingBy(Student::getStatus, Collectors.groupingBy((Student s) -> {
+                    if (s.getAge() <= 35) {
+                        return "青年";
+                    } else if (s.getAge() <= 50) {
+                        return "中年";
+                    } else {
+                        return "老年";
+                    }
+                })));
+
+        System.out.println(map2);
+
+        Map<Boolean, List<Student>> partitioning = students.stream().collect(Collectors.partitioningBy((Student s) -> {
+            if (s.getScore() < 60) {
+                return false;
+            } else {
+                return true;
+            }
+        }));
+        System.out.println(partitioning);
+
+        // 组函数
+        DoubleSummaryStatistics summaryStatistics = students.stream().collect(Collectors.summarizingDouble(Student::getScore));
+        System.out.println(summaryStatistics.getMax());
+        System.out.println(summaryStatistics.getAverage());
+        System.out.println(summaryStatistics.getCount());
+        System.out.println(summaryStatistics.getMin());
+        System.out.println(summaryStatistics.getSum());
+    }
 
     @Test
     public void testAPI() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         list.stream().map(x -> x * x).collect(Collectors.toList()).forEach(System.out::println);
 
-        students.stream().map(x -> 1).reduce(0, (x, y)-> x+y);
+        students.stream().map(x -> 1).reduce(0, (x, y) -> x + y);
     }
 }

@@ -21,7 +21,7 @@ public class TryTest {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(reader != null) {
+            if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
@@ -35,11 +35,10 @@ public class TryTest {
      * Case 2： 在case1 的基础上的升级写法，不需要显实的处理资源的关闭
      * java8 要求资源对象的实例化， 必须放在try 的一对（）内完成
      * java9 中： 可以在try（）中调用已经实例化的资源对象
-     *
      */
     @Test
     public void testTry2() {
-        try (InputStreamReader reader = new InputStreamReader(System.in)){
+        try (InputStreamReader reader = new InputStreamReader(System.in)) {
             // 读取过程。。。。。。。
             reader.read();
         } catch (IOException e) {
@@ -54,7 +53,7 @@ public class TryTest {
     public void testTry3() {
         InputStreamReader reader = new InputStreamReader(System.in);
         OutputStreamWriter writer = new OutputStreamWriter(System.out);
-        try(reader; writer) { // 处理多个资源时，中间使用分号隔开
+        try (reader; writer) { // 处理多个资源时，中间使用分号隔开
             // 此刻reader , writer 默认为final 的， 不可以对reader再次赋值
             // 读取过程。。。。。。。
             reader.read();

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class StreamTest5 {
     public static void main(String[] args) {
-        Stream<String> stream = Stream.of("hello", "world", "hello world" );
+        Stream<String> stream = Stream.of("hello", "world", "hello world");
 
         List<String> list = stream.map(String::toUpperCase).collect(Collectors.toList());
 

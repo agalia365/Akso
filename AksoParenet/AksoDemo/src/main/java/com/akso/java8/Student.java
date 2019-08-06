@@ -91,7 +91,7 @@ public class Student {
         this.score = score;
     }
 
-    public static  int compareStudentByScore(Student s1, Student s2) {
+    public static int compareStudentByScore(Student s1, Student s2) {
         return s1.getScore() - s2.getScore();
     }
 

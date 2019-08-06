@@ -16,6 +16,8 @@
         <module>AksoBatch</module>
         <module>AksoDemo</module>
         <module>AksoDemoTest</module>
+        <module>AksoSpring</module>
+        <module>AksoAlgorithm</module>
     </modules>
 
     <properties>

@@ -11,14 +11,14 @@ import java.util.stream.Stream;
 
 public class StreamAPITest {
     List<Student> students = Arrays.asList(
-        new Student("zhangsan", 90, 20),
-        new Student("lisi", 80, 30),
-        new Student("wangwu", 70, 50),
-        new Student("tianqi", 60, 80),
-        new Student("zhao", 50, 80),
-        new Student("qian", 60, 60),
-        new Student("qian", 60, 60),
-        new Student("zhou", 80, 80)
+            new Student("zhangsan", 90, 20),
+            new Student("lisi", 80, 30),
+            new Student("wangwu", 70, 50),
+            new Student("tianqi", 60, 80),
+            new Student("zhao", 50, 80),
+            new Student("qian", 60, 60),
+            new Student("qian", 60, 60),
+            new Student("zhou", 80, 80)
     );
 
     /**
@@ -27,7 +27,6 @@ public class StreamAPITest {
      * limit -- 截断流， 使其元素不超过给定数量
      * skip（n）-- 跳过元素， 返回一个扔掉了前n个元素的流。 若流中元素不足n 个，则返回一个空流。 与limit（n）互补
      * distinct--筛选 ， 通过流生成的hashcode（） 和equals（）去除重复元素
-     *
      */
     @Test
     public void test1() {
@@ -56,33 +55,33 @@ public class StreamAPITest {
     public void test3() {
         // 外部迭代
         Iterator<Student> it = students.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             System.out.println(it.next());
         }
     }
-/**
- * 映射
- * map--接受Lambda, 将元素转换成其他形式或提取信息.接受一个函数作为参数， 该函数会被应用到每个元素上， 并将其映射成一个新的元素。
- * flatMap--接收一个函数作为参数，将流中的每个值都换成另一个流， 然后把所有流连接成一个流
- *
- */
-@Test
-public  void test5() {
-    List<String> list = Arrays.asList("aaaa", "bbb", "ccc", "ddd", "eeee", "fff", "gggg", "hhhh");
-    list.stream().map((str) -> str.toUpperCase()).forEach(System.out::println);
-    System.out.println("------------------");
-    Stream<Stream<Character>> stream = list.stream().map(StreamAPITest::filterCharacter);
 
-    Stream<Character> stream1 = list.stream().flatMap(StreamAPITest::filterCharacter);
-}
+    /**
+     * 映射
+     * map--接受Lambda, 将元素转换成其他形式或提取信息.接受一个函数作为参数， 该函数会被应用到每个元素上， 并将其映射成一个新的元素。
+     * flatMap--接收一个函数作为参数，将流中的每个值都换成另一个流， 然后把所有流连接成一个流
+     */
+    @Test
+    public void test5() {
+        List<String> list = Arrays.asList("aaaa", "bbb", "ccc", "ddd", "eeee", "fff", "gggg", "hhhh");
+        list.stream().map((str) -> str.toUpperCase()).forEach(System.out::println);
+        System.out.println("------------------");
+        Stream<Stream<Character>> stream = list.stream().map(StreamAPITest::filterCharacter);
 
-public static Stream<Character> filterCharacter(String str ) {
-    List<Character> list = new ArrayList<>();
-    for (Character c : str.toCharArray()) {
-        list.add(c);
+        Stream<Character> stream1 = list.stream().flatMap(StreamAPITest::filterCharacter);
     }
-    return list.stream();
-}
+
+    public static Stream<Character> filterCharacter(String str) {
+        List<Character> list = new ArrayList<>();
+        for (Character c : str.toCharArray()) {
+            list.add(c);
+        }
+        return list.stream();
+    }
 
     /**
      * 排序
@@ -96,7 +95,7 @@ public static Stream<Character> filterCharacter(String str ) {
 
         System.out.println("--------------");
         students.stream().sorted((s1, s2) -> {
-            if(s1.getAge() == s2.getAge()) {
+            if (s1.getAge() == s2.getAge()) {
                 return s1.getName().compareTo(s2.getName());
             } else {
                 return s1.getAge() - s2.getAge();

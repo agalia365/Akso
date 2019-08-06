@@ -15,7 +15,7 @@ public class ConsumerTest {
         Consumer<Integer> consumer = x -> System.out.println(x);
         IntConsumer intConsumer = x -> System.out.println(x);
 
-        test.test(x ->System.out.println(x));
+        test.test(x -> System.out.println(x));
 
 
         test.test(consumer);    // 面向对象方式

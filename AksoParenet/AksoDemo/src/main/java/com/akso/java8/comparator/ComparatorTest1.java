@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ComparatorTest1 {
     public static void main(String[] args) {
-        List<String> list = Arrays.asList("zhangsan", "lisi", "wangwu", "zhang" , "zhao");
+        List<String> list = Arrays.asList("zhangsan", "lisi", "wangwu", "zhang", "zhao");
 
         list.stream().sorted(Comparator.comparing((String x) -> x.length()).reversed()).forEach(System.out::println);
 

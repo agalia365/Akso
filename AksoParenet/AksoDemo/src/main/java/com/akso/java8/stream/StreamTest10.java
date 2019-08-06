@@ -17,7 +17,7 @@ public class StreamTest10 {
         list.stream().mapToInt(x -> {
             System.out.println(x);
             return x.length();
-        }).filter( x -> x== 5).findFirst().ifPresent(System.out::println);
+        }).filter(x -> x == 5).findFirst().ifPresent(System.out::println);
         /**
          * hell
          * world

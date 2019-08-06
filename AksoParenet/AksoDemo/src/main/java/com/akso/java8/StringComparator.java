@@ -7,7 +7,7 @@ import java.util.List;
 
 public class StringComparator {
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("张三", "王五", "李四",  "田七");
+        List<String> names = Arrays.asList("张三", "王五", "李四", "田七");
 
         Collections.sort(names, Comparator.naturalOrder());
         System.out.println(names);

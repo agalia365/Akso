@@ -10,16 +10,16 @@ import java.util.stream.Collector;
 public class MyMapCollector<T> implements Collector<T, Set<T>, Map<T, T>> {
 
     /**
-     *  *     A a1 = supplier.get();
-     *  *     accumulator.accept(a1, t1);
-     *  *     accumulator.accept(a1, t2);
-     *  *     R r1 = finisher.apply(a1);  // result without splitting
-     *  *
-     *  *     A a2 = supplier.get();
-     *  *     accumulator.accept(a2, t1);
-     *  *     A a3 = supplier.get();
-     *  *     accumulator.accept(a3, t2);
-     *  *     R r2 = finisher.apply(combiner.apply(a2, a3));  // result with splitting
+     * *     A a1 = supplier.get();
+     * *     accumulator.accept(a1, t1);
+     * *     accumulator.accept(a1, t2);
+     * *     R r1 = finisher.apply(a1);  // result without splitting
+     * *
+     * *     A a2 = supplier.get();
+     * *     accumulator.accept(a2, t1);
+     * *     A a3 = supplier.get();
+     * *     accumulator.accept(a3, t2);
+     * *     R r2 = finisher.apply(combiner.apply(a2, a3));  // result with splitting
      */
     @Override
     public Supplier<Set<T>> supplier() {
@@ -41,9 +41,9 @@ public class MyMapCollector<T> implements Collector<T, Set<T>, Map<T, T>> {
     public BinaryOperator<Set<T>> combiner() {
         System.out.println("combiner invoked!");
         return (set1, set2) -> {
-          System.out.println("combiner: -->" +set1 + Thread.currentThread().toString());
-          set1.addAll(set2);
-          return set1;
+            System.out.println("combiner: -->" + set1 + Thread.currentThread().toString());
+            set1.addAll(set2);
+            return set1;
         };
     }
 
@@ -66,7 +66,7 @@ public class MyMapCollector<T> implements Collector<T, Set<T>, Map<T, T>> {
     public static void main(String[] args) {
         System.out.println(Runtime.getRuntime().availableProcessors());
         for (int i = 0; i < 10; i++) {
-            List<String> list = Arrays.asList("hello", "world", "hello word", "hello","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q");
+            List<String> list = Arrays.asList("hello", "world", "hello word", "hello", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q");
             Map<String, String> map = list.parallelStream().unordered().collect(new MyMapCollector<>());
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 String k = entry.getKey();

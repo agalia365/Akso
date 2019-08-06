@@ -33,7 +33,7 @@
 
 ## 2.3 算法分类
 
-![img](sortCategory.jpg)
+![img](sortCategory.png)
 
 ## 2.4 排序及具体介绍
 
@@ -220,9 +220,9 @@ public class InsertionSort {
 
 ```
 
-### 2.4.3 冒泡排序
+### 2.4.3 冒泡排序 (Bubble Sort)
 
-冒泡排序：　它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。
+冒泡排序：　冒泡排序是一种简单的排序算法, 它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。
 
 动图示例：
 
@@ -231,3 +231,389 @@ public class InsertionSort {
 
 
 代码示例
+
+```java
+package com.akso.algorithm.sort;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+/**
+ * 冒泡排序：
+ *
+ * 时间复杂度O(n^2)
+ * 空间复杂度O(1)
+ * 稳定性: 稳定
+ *
+ * ４种实现方式
+ *
+ */
+public class BubbleSort {
+    int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
+
+    @Test
+    public void test1() {
+        bubbleSort1(arr);
+        print(arr);
+    }
+
+    @Test
+    public void test2() {
+        bubbleSort2(arr);
+        print(arr);
+    }
+
+    @Test
+    public void test3() {
+        bubbleSort3(arr);
+        print(arr);
+    }
+
+    @Test
+    public void test4() {
+        bubbleSort4(arr);
+        print(arr);
+    }
+
+    /**
+     * 冒泡排序的第一种实现，　常规冒泡排序 -->通过对比相邻2个数，得到最大/最小数；
+     */
+    public void bubbleSort1(int[] arr) {
+        for(int i=0; i< arr.length; i++) {
+            for(int j=0; j < arr.length - 1; j++) {
+                if(arr[j] > arr[j+1]) {
+                    swap(arr, j, j+1);
+                }
+            }
+        }
+    }
+
+    /**
+     * 冒泡排序的第二种实现, 在常规冒泡排序的基础上，跳过已排好的序列。
+     */
+    public void bubbleSort2(int[] arr) {
+        int right = arr.length - 1;
+        for (int i = 0; i < arr.length ; i++) {
+            for(int j=0; j < right; j++) {
+                if(arr[j] > arr[j + 1]) {
+                    swap(arr, j , j+1);
+                }
+            }
+            right--;
+        }
+    }
+
+    /**
+     * 冒泡排序的第三种实现
+     * // 初始化冒泡排序的swap下标，每次比较值之前初始化为0，
+     * 当一次循环比较结束后，还未发生swap，说明当前数组已存在顺序，无需再继续排序
+     */
+    public void bubbleSort3(int[] arr) {
+        int right = arr.length -1 ;
+        int m = 1;
+        while(m>0) {
+            m=0;
+            for(int j=0; j<right; j++) {
+                if(arr[j] > arr[j + 1]) {
+                    swap(arr, j, j+1);
+                    m = j;
+                }
+            }
+            right--;
+        }
+    }
+
+    /**
+     * 冒泡排序的第四种实现, 即双向排序， 又称为鸡尾酒排序法
+     *
+     * 进行双向的循环，正向循环把最大元素移动到末尾，逆向循环把最小元素移动到最前
+     *
+     */
+    public void bubbleSort4(int[] arr) {
+        int left =0;
+        int right = arr.length -1;
+        while(left < right) {
+
+            for (int i = 0; i < arr.length-1; i++) {
+                if(arr[i] > arr[i + 1]) {
+                    swap(arr, i, i+1);
+                }
+            }
+            left++;
+
+            for (int j = right; j >1 ; j--) {
+                if(arr[j] < arr[j-1]) {
+                    swap(arr, j, j-1);
+                }
+            }
+            right--;
+        }
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
+    private void print(int[] arr) {
+        Arrays.stream(arr).forEach(System.out::print);
+    }
+}
+```
+
+### 2.4.4  希尔排序（Shell Sort）
+
+希尔排序是希尔（Donald Shell）于1959年提出的一种排序算法。希尔排序也是一种插入排序，它是简单插入排序经过改进之后的一个更高效的版本，也称为缩小增量排序，同时该算法是冲破O(n2）的第一批算法之一。它与插入排序的不同之处在于，它会优先比较距离较远的元素。希尔排序又叫缩小增量排序。
+
+希尔排序是把记录按下表的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。
+
+**算法描述**
+
+先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，具体算法描述：
+
+- 选择一个增量序列t1，t2，…，tk，其中ti>tj，tk=1；
+- 按增量序列个数k，对序列进行k 趟排序；
+- 每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m 的子序列，分别对各子表进行直接插入排序。仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。
+
+**算法分析**
+
+最佳情况：T(n) = O(nlog2 n)  最坏情况：T(n) = O(nlog2 n)  平均情况：T(n) =O(nlog2n)　
+
+希尔排序的ｇａｐ　除了采用每次折半的算法外还可以采用Knuth算法，即
+
+ｈ= 1;
+
+h = 3*h + 1;
+
+示例：
+
+int h =　１；
+
+while(h<array.length/3) {
+
+​		h = h*3 + 1;
+
+}
+
+for(int gap = h; gap > 0; gap = (gap - 1 )/3) {
+
+​		........
+
+}
+
+
+
+```java
+package com.akso.algorithm.sort;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+public class ShellSort {
+    int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
+
+    @Test
+    public void test1() {
+        shellsort(arr);
+        print(arr);
+    }
+
+    public void shellsort(int[] arr) {
+        int gap = arr.length/2;
+        while(gap > 0) {
+            for (int i = gap; i < arr.length ; i++) {
+                int preIndex = i - gap;
+                int tmp = arr[i];
+                int pos = -1;
+                while(preIndex >= 0 && tmp < arr[preIndex]) {
+                    arr[preIndex+gap] = arr[preIndex];
+                    pos = preIndex;
+                    preIndex = preIndex - gap;
+                }
+                if(pos != -1) {
+                    arr[pos] = tmp;
+                }
+            }
+            gap = gap / 2;
+        }
+
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
+
+    private void print(int[] arr) {
+        Arrays.stream(arr).forEach(System.out::print);
+    }
+}
+
+```
+
+### 2.5.5 归并排序（Merge Sort)
+
+和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是O(n log n）的时间复杂度。代价是需要额外的内存空间。
+
+归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。归并排序是一种稳定的排序方法。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为2-路归并。
+
+**算法描述**
+
+把长度为n的输入序列分成两个长度为n/2的子序列；对这两个子序列分别采用归并排序；将两个排序好的子序列合并成一个最终的排序序列。
+
+**算法分析**
+
+最佳情况：T(n) = O(n)  最差情况：T(n) = O(nlogn)  平均情况：T(n) = O(nlogn)
+
+![img](/home/leo/IdeaProjects/Akso/AksoParenet/AksoNote/notes/Z_Algorithm/mergerSort.gif)
+
+```java
+package com.akso.algorithm.sort;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+public class MergeSort {
+    int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
+
+    @Test
+    public void test1() {
+        int[] result = mergeSort(arr);
+        print(result);
+    }
+
+    public int[] mergeSort(int[] arr) {
+        if(arr.length < 2) {
+            return arr;
+        }
+        int mid = arr.length/2;
+        int[] left = Arrays.copyOfRange(arr, 0, mid);
+        int[] right = Arrays.copyOfRange(arr, mid, arr.length);
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    public int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
+        int lt = 0;
+        int r = 0;
+        for(int i=0; i < result.length; i++) {
+            if(lt >= left.length) {
+                result[i] = right[r++];
+            } else if(r >= right.length) {
+                result[i] = left[lt++];
+            } else if(left[lt] <= right[r] )  {
+                result[i] = left[lt++];
+            } else {
+                result[i] = right[r++];
+            }
+        }
+        return result;
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
+
+    private void print(int[] arr) {
+        Arrays.stream(arr).forEach(System.out::print);
+    }
+}
+
+```
+
+### 2.5.6 快速排序（Quick Sort）
+
+快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。
+
+**算法描述**
+
+快速排序使用分治法来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：
+
+- 从数列中挑出一个元素，称为 “基准”（pivot）；
+- 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
+- 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
+
+**动图演示**
+
+![img](quickSort.gif)
+
+
+
+```java
+package com.akso.algorithm.sort;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+public class QuickSort {
+
+    int[] arr = {5, 3, 6, 8, 1, 7, 9, 4, 2, 0};
+
+    @Test
+    public void test1() {
+        quickSort(arr, 0, arr.length -1);
+        print(arr);
+    }
+
+    public void quickSort(int[] arr, int left, int right) {
+        if(left < right) {
+            int pivot = partition(arr, left, right);
+            print(arr);
+        System.out.println(pivot);
+            quickSort(arr, left, pivot-1);
+            quickSort(arr, pivot+1, right);
+        }
+    }
+
+    public int partition(int[] arr, int left, int right) {
+        int pivot = arr[left];
+        while(left < right) {
+
+            while(left < right && arr[right] >= pivot) { // 从右端开始扫描， 找出小于轴的值， 放到左边的位置
+                right--;
+            }
+            arr[left] = arr[right];
+
+            while(left < right && arr[left] <= pivot) { // 从左端开始扫描， 找出大于轴的数据， 放到右边的位置
+                left++;
+            }
+            arr[right] = arr[left];
+        }
+        System.out.println("left===>" + left + ", right ===>" + right);
+        arr[left] = pivot; // 把轴的数据放到对应的轴位置
+        return left;
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j]= arr[i];
+        arr[i] = temp;
+    }
+    private void print(int[] arr) {
+        Arrays.stream(arr).forEach(System.out::print);
+        System.out.println();
+    }
+}
+
+```
+
+### 2.5.7 堆排序(Heap Sort)
+
+堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
+
+**算法描述**
+
+- 将初始待排序关键字序列(R1,R2….Rn)构建成大顶堆，此堆为初始的无序区；
+- 将堆顶元素R[1]与最后一个元素R[n]交换，此时得到新的无序区(R1,R2,……Rn-1)和新的有序区(Rn),且满足R[1,2…n-1]<=R[n]；
+- 由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2….Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成。
+
+**动图演示**
+
+![img](heapSort.gif)

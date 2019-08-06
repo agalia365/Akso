@@ -8,7 +8,7 @@ public class CollectionMapTest {
 
     /**
      * 创建一个只读特点的集合 JDK 8 及以前的做法 , case1
-      */
+     */
     @Test
     public void test1() {
         List<String> list = Arrays.asList("hello", "hi", "how are you", "what is up", "how is going");
@@ -31,7 +31,7 @@ public class CollectionMapTest {
         Set<String> set = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("hello", "hi", "how are you")));
         set.forEach(System.out::println);
 
-        Map<String, Integer> map = Collections.unmodifiableMap(new HashMap<>(){
+        Map<String, Integer> map = Collections.unmodifiableMap(new HashMap<>() {
             {
                 put("Tom", 100);
                 put("Lee", 120);
