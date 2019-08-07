@@ -11,6 +11,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring.boot>2.1.6.RELEASE</spring.boot>
 <!--        <cloud.version>Greenwich.SR1</cloud.version>-->
         <cloud.version>Finchley.SR2</cloud.version>
 
@@ -60,6 +61,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
