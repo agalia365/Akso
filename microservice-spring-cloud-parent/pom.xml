@@ -13,7 +13,7 @@
         <java.version>1.8</java.version>
         <spring.boot>2.1.6.RELEASE</spring.boot>
 <!--        <cloud.version>Greenwich.SR1</cloud.version>-->
-        <cloud.version>Finchley.SR2</cloud.version>
+        <cloud.version>Greenwich.M1</cloud.version>
 
         <!--<cloud.version>Camden.SR3</cloud.version>-->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
