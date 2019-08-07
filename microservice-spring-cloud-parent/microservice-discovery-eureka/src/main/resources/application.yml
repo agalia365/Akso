@@ -1,3 +1,4 @@
+
 server:
   port: 8761
 
@@ -5,9 +6,13 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
-    instance-id: 192.168.15.93
-
+    serviceUrl:
+      defaultZone: http://user:123@localhost:8761/eureka
+      instance: microservice-discovery-eureka
+    #prefer-ip-address: true
+    #instance-id: 192.168.15.93
+spring:
+  security:
+    user:
+      name: user
+      password: 123
