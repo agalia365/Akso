@@ -3,7 +3,12 @@ server:
   port: 8761
 
 eureka:
+  instance:
+    statusPageUrlPath: http://admin:123456@localhost:8761/info
+    healthCheckUrlPath: http://admin:123456@localhost:8761/health
   client:
+    healthcheck:
+      enabled: true
     register-with-eureka: false
     fetch-registry: false
     serviceUrl:
@@ -16,3 +21,5 @@ spring:
     user:
       name: admin
       password: 123456
+
+
