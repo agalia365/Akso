@@ -7,12 +7,12 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     serviceUrl:
-      defaultZone: http://user:123@localhost:8761/eureka
+      defaultZone: http://admin:123456@localhost:8761/eureka
       instance: microservice-discovery-eureka
     #prefer-ip-address: true
     #instance-id: 192.168.15.93
 spring:
   security:
     user:
-      name: user
-      password: 123
+      name: admin
+      password: 123456
