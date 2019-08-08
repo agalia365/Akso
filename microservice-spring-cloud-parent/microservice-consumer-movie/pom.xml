@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.akso.springCloud</groupId>```
-        <artifactId>microservice-spring-cloud</artifactId>
+        <artifactId>microservice-spring-cloud-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.example</groupId>
