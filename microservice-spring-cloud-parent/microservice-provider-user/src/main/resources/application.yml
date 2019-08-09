@@ -1,6 +1,6 @@
 
 server:
-  port: 7900
+  port: 7901
 spring:
   jpa:
     generate-ddl: false
@@ -42,14 +42,20 @@ instance:
   # PS.生产环境由于安全性的问题，注意不要暴露敏感端点
 
 # 设置暴露所有端点
-
-management:
-  security:
-    enable: false
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  server:
+#    port: 10111
+#    servlet:
+#      context-path: /
+#    ssl:
+#      enabled: false
+#  endpoint:
+#    health:
+#      show-details: always
 # 设置单个端点（/shutdown）可用
 #management.endpoint.shutdown.enabled=true
 

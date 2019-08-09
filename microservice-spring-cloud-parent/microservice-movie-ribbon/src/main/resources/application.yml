@@ -1,11 +1,11 @@
 server:
-  port: 7901
+  port: 8001
 
 user:
-  servicePath: http://localhost:7900/simple/
+  servicePath: http://microservice-provider-user:7900/simple/
 spring:
   application:
-    name: microservice-consumer-movie
+    name: microservice-movie-ribbon
 
 eureka:
   client:
