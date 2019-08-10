@@ -1,4 +1,4 @@
-package com.example.microserviceconsumermovie;
+package com.example.microservice.movie.feign;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

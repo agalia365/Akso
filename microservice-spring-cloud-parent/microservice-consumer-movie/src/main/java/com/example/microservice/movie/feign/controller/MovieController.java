@@ -1,6 +1,6 @@
-package com.example.microserviceconsumermovie.controller;
+package com.example.microservice.movie.feign.controller;
 
-import com.example.microserviceconsumermovie.entity.User;
+import com.example.microservice.movie.feign.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

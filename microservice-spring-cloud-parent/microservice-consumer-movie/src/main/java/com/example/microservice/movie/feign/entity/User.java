@@ -1,4 +1,4 @@
-package com.example.microserviceconsumermovie.entity;
+package com.example.microservice.movie.feign.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

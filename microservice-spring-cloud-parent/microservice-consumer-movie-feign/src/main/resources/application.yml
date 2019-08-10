@@ -1,11 +1,11 @@
 server:
-  port: 7901
+  port: 7905
 
 user:
   servicePath: http://localhost:7900/simple/
 spring:
   application:
-    name: microservice-consumer-movie
+    name: microservice-consumer-movie-feign
 
 eureka:
   client:
