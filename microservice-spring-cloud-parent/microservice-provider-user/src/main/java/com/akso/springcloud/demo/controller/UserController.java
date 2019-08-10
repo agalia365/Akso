@@ -5,9 +5,7 @@ import com.akso.springcloud.demo.service.UserService;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -15,7 +13,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private EurekaClient discoveryClient;
+    protected EurekaClient discoveryClient;
 
     @GetMapping("/simple/{id}")
     public User findById(@PathVariable Long id) {
@@ -26,5 +24,10 @@ public class UserController {
     public String serviceUrl() {
         InstanceInfo instance = discoveryClient.getNextServerFromEureka("localhost", true);
         return instance.getHomePageUrl();
+    }
+
+    @PostMapping(value = "/user")
+    public User postUser(@RequestBody User user) {
+        return user;
     }
 }

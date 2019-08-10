@@ -341,3 +341,9 @@ public RestTemplate restTemplate(RestTemplateBuilder builder) {
 `Feign`是`Netflix`开发的声明式、模块化的HTTP客户端。`Feign`可帮助我们更好更快的便捷、优雅地调用`HTTP API`。
 
 在`Spring Cloud`中，使用`Feign`非常简单——创建一个接口，并在接口上添加一些注解。`Feign`支持多种注释，例如Feign自带的注解或者JAX-RS注解等 Spring Cloud对Feign进行了增强，使Feign支持了Spring MVC注解，并整合了Ribbon和 Eureka,从而让Feign 的使用更加方便。**只需要通过创建接口并用注解来配置它既可完成对Web服务接口的绑定。**
+
+### Feign继承特性
+
+`Feign`支持继承，**但不支持多继承**。使用继承，可将一些公共操作分组到一些父类接口中，从而简化Feign的开发。
+
+**所以在实际开发中，调用服务接口时，可直接按接口类和实现类进行编写，调用方引入接口依赖，继承一个本地接口，这样接口方法默认都是定义好的，也少了很多编码量。用起来就更爽了，就是有点依赖性，对方服务修改后需要同步更新下，但这个团队内部约定下问题不大的**
