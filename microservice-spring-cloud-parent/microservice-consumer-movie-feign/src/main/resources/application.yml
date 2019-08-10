@@ -1,0 +1,20 @@
+server:
+  port: 7901
+
+user:
+  servicePath: http://localhost:7900/simple/
+spring:
+  application:
+    name: microservice-consumer-movie
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@localhost:8761/eureka
+      enabled: true
+      register-with-eureka: true
+      fetch-registry: true
+    healthcheck:
+      enabled: true
+instance:
+  prefer-ip-address: true
