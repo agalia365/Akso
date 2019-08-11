@@ -550,3 +550,28 @@ public class FeignClientFallback implements UserFeignClient {
 3.  启动eureka 和 provider， 和feignwithHystrix ，测试
 
 ## 7.3 为feign 禁用Hystrix
+
+1. 配置类
+
+   ```java
+   @Configuration
+   public class FeignDisableHystrixConfiguration {
+       @Bean
+       @Scope("prototype")
+       public Feign.Builder feignBuilder() {
+           return Feign.builder();
+       }
+   }
+   ```
+
+2. 为Feign client 指定配置类
+
+   ```java
+   @FeignClient(name = "microservice-provider-user",  fallback = FeignClientFallback2.class, configuration = FeignDisableHystrixConfiguration.class)
+   public interface UserFeignClient2 {
+   
+       @RequestMapping(value = "/test", method = RequestMethod.GET)
+       public String getUser();
+   }
+   ```
+

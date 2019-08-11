@@ -4,7 +4,7 @@ import com.example.microservice.movie.feign.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "microservice-provider-user",  fallback = FeignClientFallback.class)
+@FeignClient(name = "microservice-provider-user2",  fallback = FeignClientFallback.class)
 public interface UserFeignClient {
     @RequestMapping(value = "/simple/{id}", method = RequestMethod.GET)
     public User findById(@PathVariable("id") Long id );
