@@ -12,10 +12,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-public class MicroserviceMovieFeignHystrixApplication {
+public class MicroserviceMovieFeignWithoutHystrixApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MicroserviceMovieFeignHystrixApplication.class, args);
+        SpringApplication.run(MicroserviceMovieFeignWithoutHystrixApplication.class, args);
     }
 
     @Bean

@@ -1,5 +1,5 @@
 server:
-  port: 7906
+  port: 7907
 
 user:
   servicePath: http://localhost:7900/simple/
