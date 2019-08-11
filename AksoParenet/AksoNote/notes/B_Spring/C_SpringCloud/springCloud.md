@@ -395,7 +395,7 @@ Hystrix 如果它在一段时间内侦测到许多类似的错误，会强迫其
 
 使得应用程序继续执行而不用等待修正错误，或者浪费CPU时间去等到长时间的超时产生。Hystrix熔断器也可以使应用程序能够诊断错误是否已经修正，如果已经修正，应用程序会再次尝试调用操作。
 
-### 7.1 Hystrix特性
+## 7.1 Hystrix特性
 
 1.请求熔断： 当Hystrix Command请求后端服务失败数量超过一定比例(默认50%), 断路器会切换到开路状态(Open). 这时所有请求会直接失败而不会发送到后端服务. 断路器保持在开路状态一段时间后(默认5秒), 自动切换到半开路状态(HALF-OPEN).
 
@@ -503,3 +503,50 @@ public User findByIdFallback(Long id) {
    这里进入注解@HystrixCommand(fallbackMethod = "findByIdFallback")的背后原理来实现熔断和服务降级。用我们自己手写的代码去实现熔断和服务降级。那么Hystrix给我们留下了什么样的接口呢？可以让我们自己手动更灵活的去实现熔断和服务降级。
 
    Hystrix给我们提供了HystrixCommand类，让我们去继承它，去实现灵活的熔断和服务降级。
+
+## 7.2 Feign 使用Hystrix
+
+1. @FeignClient 配置服务fallback指定的class
+
+```java
+@FeignClient(name = "microservice-provider-user",  fallback = FeignClientFallback.class)
+public interface UserFeignClient {
+    @RequestMapping(value = "/simple/{id}", method = RequestMethod.GET)
+    public User findById(@PathVariable("id") Long id );
+
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public User postUser(User user);
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public User getUser(User user);
+}
+```
+
+2. 定义fallback 的具体实现类， 继承了feign接口
+
+```java
+@Component
+public class FeignClientFallback implements UserFeignClient {
+    @Override
+    public User findById(Long id) {
+        User user = new User();
+        user.setId(0L);
+        user.setUsername("default user");
+        return user;
+    }
+
+    @Override
+    public User postUser(User user) {
+        return null;
+    }
+
+    @Override
+    public User getUser(User user) {
+        return null;
+    }
+}
+```
+
+3.  启动eureka 和 provider， 和feignwithHystrix ，测试
+
+## 7.3 为feign 禁用Hystrix

@@ -1,5 +1,5 @@
 server:
-  port: 7905
+  port: 7906
 
 user:
   servicePath: http://localhost:7900/simple/
@@ -18,3 +18,11 @@ eureka:
       enabled: true
 instance:
   prefer-ip-address: true
+management:
+  endpoint:
+    health:
+      show-details: always
+feign:
+  # Dalston SR1（待定）之后的版本默认关闭hystrix对feign的支持，如果想要使用fallback功能这里必须启用
+  hystrix:
+    enabled: true
