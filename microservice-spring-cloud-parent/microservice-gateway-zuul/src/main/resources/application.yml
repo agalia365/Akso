@@ -1,0 +1,25 @@
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    statusPageUrlPath: http://admin:123456@localhost:8761/info
+    healthCheckUrlPath: http://admin:123456@localhost:8761/health
+  client:
+    healthcheck:
+      enabled: true
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://admin:123456@localhost:8761/eureka
+      instance: microservice-discovery-eureka
+    #prefer-ip-address: true
+    #instance-id: 192.168.15.93
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+
