@@ -39,6 +39,7 @@
         <module>microservice-movie-ribbon-with-hystrix</module>
         <module>microservice-consumer-movie-feign-with-histrix</module>
         <module>microservice-consumer-movie-feign-without-histrix</module>
+        <module>microservice-gateway-zuul</module>
     </modules>
     <dependencies>
         <dependency>

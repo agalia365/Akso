@@ -575,3 +575,5 @@ public class FeignClientFallback implements UserFeignClient {
    }
    ```
 
+# 8. API Gateway
+
