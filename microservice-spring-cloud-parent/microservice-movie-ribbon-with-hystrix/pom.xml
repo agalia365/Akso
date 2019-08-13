@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.akso.springCloud</groupId>```
         <artifactId>microservice-spring-cloud-parent</artifactId>
+        <groupId>com.akso.springCloud</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.akso.springCloud</groupId>
-    <artifactId>microservice-consumer-movie</artifactId>
+    <artifactId>microservice-movie-ribbon-with-hystrix</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>microservice-consumer-movie</name>
-    <description>Demo project for Spring Boot</description>
+    <name>microservice-movie-ribbon</name>
+    <description>ribbon project for Spring cloud movie</description>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -29,11 +31,11 @@
             <artifactId>xalan</artifactId>
             <version>2.7.2</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -41,6 +43,15 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>actuator
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>actuator
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-javanica</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
 
@@ -52,4 +63,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>
