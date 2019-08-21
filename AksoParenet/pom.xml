@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <groupId>com.akso</groupId>
-    <artifactId>AksoParenet</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0</version>
-    <modules>
-        <module>AksoNote</module>
-        <module>AksoAPI</module>
-        <module>AksoBusiness</module>
-        <module>AksoWeb</module>
-        <module>AksoBatch</module>
-        <module>AksoDemo</module>
-        <module>AksoDemoTest</module>
-        <module>AksoSpring</module>
-        <module>AksoAlgorithm</module>
-    </modules>
+    <artifactId>boot-mangodb</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>boot-mangodb</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>4.12</junit.version>
-        <log4j.version>1.2.17</log4j.version>
-        <maven.compiler.source>1.12</maven.compiler.source>
-        <maven.compiler.target>1.12</maven.compiler.target>
+        <java.version>1.8</java.version>
     </properties>
-
-    <!-- 配置远程发布到私服，mvn deploy -->
-    <!--<distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://XXXXXXXX:8088/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://XXXXXXXX:8088/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>-->
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

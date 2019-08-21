@@ -1,0 +1,20 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://admin:123456@localhost:8761/eureka
+      instance: microservice-discovery-eureka
+
+zuul:
+  routes:
+    users:
+      path: /simple/**
+        serviceId: users_service
