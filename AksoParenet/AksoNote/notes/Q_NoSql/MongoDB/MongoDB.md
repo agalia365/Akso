@@ -1,4 +1,4 @@
-​									**MongoDB**
+									**MongoDB**
 
 MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。
 
@@ -123,3 +123,163 @@ NoSQL用于超大规模数据的存储。（例如谷歌或Facebook每天为他�
 \- 非结构化和不可预知的数据
 \- CAP定理 
 \- 高性能，高可用性和可伸缩性
+
+# 2. MongoDB 的增删改查
+
+## 2.1、集合
+
+创建集合：use 集合名
+
+删除集合：db.集合名.drop()
+
+删除当前所有集合：db.dropDatabase() --慎用
+
+创建固定集合：db.createCollection("集合名", { capped : true, autoIndexId : true, size : 集合空间大小, max : 文档最大个数} )
+
+注：新建集合是无法查看到的，但它存在，需要向它新增数据然后才能够查看到
+
+在MongoDB中不需要新建集合，当你新增数据时，他会为你自动创建集合
+
+ 
+
+查看所有集合所占内存：show dbs
+
+查看已有集合：show collections
+
+## 2.2、数据
+
+查询：db.getCollection('要查询的集合名').find({"要查询的列名","要查询的值"})
+
+新增：db.集合名.insert({title: 'MongoDB 教程', description: 'MongoDB 是一个 Nosql 数据库', by: '菜鸟教程', url: 'http://www.runoob.com', tags: ['mongodb', 'database', 'NoSQL'], likes: 100 })
+
+删除：db.getCollection('要删除的集合名').remove({"要删除的列名":"要删除的值"})
+
+修改：db.集合名.update（{'要修改的列名'：'要修改的原数据的值'}，{$ set：{'要修改的列名'：'要修改成的数据的值'}}）
+
+ 
+
+注：定义到sql语句要操作的集合的方法有两种，
+
+（1）、db.getCollection('集合名').要进行的操作(insert、find、remove、update)(条件书写格式一致)
+
+（2）、db.集合名.要进行的操作(insert、find、remove、update)(条件书写格式一致)
+
+集合列名不可为中文，可不用引号包括
+
+新增数值型数据，将要新增的字段值不要使用引号包括，他会自动给数值赋Double
+
+ 
+
+数据操作：
+show collections；#查看集合
+创建集合、插入：
+db.createCcollection();#创建集合
+db.student.insert({"name":"张三","age":"22","sex":"男","class":"计算机2班"});#如果数据库中不存在集合，就创建并插入这些数据
+db.student.insert({"name":"李四","age":"22","sex":"女","phone":"18513081650","class":"计算机1班"});#里面的key-value不用保持一致
+db.student.insert([{"name":"王五","age":"22","sex":"男","class":"计算机2班"},{"name":"赵六","age":"22","sex":"女","phone":"18513081650","class":"计算机1班"}]);#同时插入多条数据
+
+更新：
+db.student.update({"name":"张三"},{"name":"张三丰"});#如果有多条语句，只修改第一条，会覆盖原有数据
+db.student.update({"22":"女"},{"name":"张三丰"});
+db.student.update({"name":"张三"},{$set:{"name":"张无忌"}});#只想改某个key的value使用set
+db.student.update({"name":"王五"},{$set:{"name":"张无忌"}},{multi:true});#把所有的记录都改了
+
+查询：
+db.student.find();#查询全部
+db.student.find({"name":"李四"});#查询指定记录，返回这一行结果
+db.student.find({"name":"张无忌","age":"28"});#and操作
+db.student.find({$or:[{"name":"张无忌"},{"name":"李四"}]});#or操作
+db.student.find().pretty();#格式化显示
+db.student.find().count();#获取结果的行数
+db.student.find().sort({"age":-1});#按照sort里面key的值排序，1为正序，-1为倒序
+
+删除：
+db.student.remove();#删除所有数据
+db.student.remove({"22":"女"});#按照条件删除
+db.student.remove({"name":"张无忌"},2);#删除几条
+
+
+
+## 2.3、条件判断运算符(>、<、>=、<=、< 列名<、!=、==)
+
+> : db.集合名.find({"进行判断的列名" : {$gt : 100}})
+
+< : db.集合名.find({进行判断的列名 : {$lt : 150}})
+
+>= : db.集合名.find({进行判断的列名 : {$gte : 100}})
+
+<= : db.集合名.find({进行判断的列名 : {$lte : 150}})
+
+<列名< : db.集合名.find({进行判断的列名 : {$lt :200, $gt : 100}})
+
+注：
+
+$gt -------- greater than >
+
+$gte --------- gt equal >=
+
+$lt -------- less than <
+
+$lte --------- lt equal <=
+
+$ne ----------- not equal !=
+
+$eq -------- equal ==
+
+ 
+
+## 2.4、排序
+
+升序 ：db.集合名.find().sort({列名:1})
+
+降序 ：db.集合名.find().sort({列名:-1})
+
+根据升序降序获取指定列的值：db.col.find({},{"所要查询的列名":1,_id:0}).sort({"进行排序的列名":-1})
+
+# 3. 聚合操作
+
+MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。有点类似sql语句中的 count(*)。
+
+**aggregate**() 方法
+
+MongoDB中聚合的方法使用aggregate()。
+
+**语法**
+
+aggregate() 方法的基本语法格式如下所示：
+
+```
+>db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)
+```
+
+下表展示了一些聚合的表达式:
+
+| 表达式    | 描述                                           | 实例                                                         |
+| :-------- | :--------------------------------------------- | :----------------------------------------------------------- |
+| $sum      | 计算总和。                                     | db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : "$likes"}}}]) |
+| $avg      | 计算平均值                                     | db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}]) |
+| $min      | 获取集合中所有文档对应值得最小值。             | db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$min : "$likes"}}}]) |
+| $max      | 获取集合中所有文档对应值得最大值。             | db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$max : "$likes"}}}]) |
+| $push     | 在结果文档中插入值到一个数组中。               | db.mycol.aggregate([{$group : {_id : "$by_user", url : {$push: "$url"}}}]) |
+| $addToSet | 在结果文档中插入值到一个数组中，但不创建副本。 | db.mycol.aggregate([{$group : {_id : "$by_user", url : {$addToSet : "$url"}}}]) |
+| $first    | 根据资源文档的排序获取第一个文档数据。         | db.mycol.aggregate([{$group : {_id : "$by_user", first_url : {$first : "$url"}}}]) |
+| $last     | 根据资源文档的排序获取最后一个文档数据         | db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}]) |
+
+**管道的概念**
+
+管道在Unix和Linux中一般用于将当前命令的输出结果作为下一个命令的参数。
+
+MongoDB的聚合管道将MongoDB文档在一个管道处理完毕后将结果传递给下一个管道处理。管道操作是可以重复的。
+
+表达式：处理输入文档并输出。表达式是无状态的，只能用于计算当前聚合管道的文档，不能处理其它的文档。
+
+这里我们介绍一下聚合框架中常用的几个操作：
+
+- $project：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。
+- $match：用于过滤数据，只输出符合条件的文档。$match使用MongoDB的标准查询操作。
+- $limit：用来限制MongoDB聚合管道返回的文档数。
+- $skip：在聚合管道中跳过指定数量的文档，并返回余下的文档。
+- $unwind：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。
+- $group：将集合中的文档分组，可用于统计结果。
+- $sort：将输入文档排序后输出。
+- $geoNear：输出接近某一地理位置的有序文档。
