@@ -1,6 +1,6 @@
 package com.akso.Thread;
 
-public class MyThread extends Thread{
+public class MyThread extends Thread {
     public void run() {
         System.out.println("this is my thread");
         try {

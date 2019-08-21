@@ -28,12 +28,12 @@ public class MovieController {
 
     @GetMapping("/movie/{id}")
     @HystrixCommand(fallbackMethod = "findByIdFallback")
-    public User findById(@PathVariable Long id ) {
-        return this.restTemplate.getForObject(userServicePath + id , User.class);
+    public User findById(@PathVariable Long id) {
+        return this.restTemplate.getForObject(userServicePath + id, User.class);
     }
 
     public User findByIdFallback(Long id) {
-        User user  = new User();
+        User user = new User();
         user.setId(0L);
         return user;
     }

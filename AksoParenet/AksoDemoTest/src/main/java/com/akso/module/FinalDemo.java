@@ -20,5 +20,5 @@ public final class FinalDemo {
         this.b = b;
     }
 
-    
+
 }

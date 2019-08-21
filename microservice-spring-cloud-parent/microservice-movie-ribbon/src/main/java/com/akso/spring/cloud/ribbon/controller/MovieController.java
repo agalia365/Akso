@@ -26,13 +26,13 @@ public class MovieController {
     private LoadBalancerClient loadBalancerClient;
 
     @GetMapping("/movie/{id}")
-    public User findById(@PathVariable Long id ) {
-        return this.restTemplate.getForObject(userServicePath + id , User.class);
+    public User findById(@PathVariable Long id) {
+        return this.restTemplate.getForObject(userServicePath + id, User.class);
     }
 
     @GetMapping("/log-user-instance")
     public void logUserInstance() {
         ServiceInstance instance = this.loadBalancerClient.choose("microservice-provider-user");
-        logger.info("instance ==> serviceId :[" + instance.getServiceId() + "], host: [" +  instance.getHost() + "], port: [" + instance.getPort() + "].");
+        logger.info("instance ==> serviceId :[" + instance.getServiceId() + "], host: [" + instance.getHost() + "], port: [" + instance.getPort() + "].");
     }
 }

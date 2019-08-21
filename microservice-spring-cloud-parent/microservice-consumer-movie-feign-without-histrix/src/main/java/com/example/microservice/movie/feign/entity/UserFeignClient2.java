@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "microservice-provider-user",  fallback = FeignClientFallback2.class, configuration = FeignDisableHystrixConfiguration.class)
+@FeignClient(name = "microservice-provider-user", fallback = FeignClientFallback2.class, configuration = FeignDisableHystrixConfiguration.class)
 public interface UserFeignClient2 {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

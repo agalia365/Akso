@@ -20,7 +20,7 @@ public class MyExecutor {
         executorService1.shutdown();
 
         System.out.println("------------");
-        ExecutorService executorService12= Executors.newSingleThreadExecutor();
+        ExecutorService executorService12 = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 10; i++) {
             executorService12.execute(new MyRunnable());
         }

@@ -1,8 +1,8 @@
 package com.akso.module;
 
-public class CloneDemo implements  Cloneable{
+public class CloneDemo implements Cloneable {
 
-    private int a =3;
+    private int a = 3;
     private int b = 4;
 
     @Override
@@ -31,7 +31,7 @@ public class CloneDemo implements  Cloneable{
 
     @Override
     public CloneDemo clone() throws CloneNotSupportedException {
-       return  (CloneDemo) super.clone();
+        return (CloneDemo) super.clone();
 
     }
 

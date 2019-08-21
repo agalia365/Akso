@@ -7,7 +7,8 @@ import java.math.BigDecimal;
 
 @Entity
 public class User implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String username;
